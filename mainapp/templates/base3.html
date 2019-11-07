@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+{% load dictionary_tags %}
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Moniac 21">
+    <meta name="author" content="Daniel kakai">
+    <!-- Title Page-->
+    <title>Moniac 21</title>
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'mainapp/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'mainapp/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'mainapp/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'mainapp/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet"
+          media="all">
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'mainapp/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    <!-- Vendor CSS-->
+    <link href="{% static 'mainapp/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'mainapp/css/jquery.dataTables.css' %}" media="all">
+    <link rel="stylesheet" type="text/css" href="{% static 'mainapp/css/dataTables.fontAwesome.css' %}" media="all">
+    <link href="{% static 'mainapp/css/theme.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body >
+<div class="page-wrapper">
+    <!-- HEADER DESKTOP-->
+    <header class="header-desktop3 d-none d-lg-block">
+        <div class="section__content section__content--p35">
+            <div class="header3-wrap">
+                <div class="header__logo">
+                    <a href="/">
+                        <img src="{% static 'mainapp/images/icon/logo4.png' %}" alt="IITA logo"/>
+                    </a>
+                </div>
+                <div class="header__navbar">
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="{% url 'farmers' %}">
+                                <i class="fas fa-users"></i>
+                                <span class="bot-line"></span>Farmers</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'fields' %}">
+                                <i class="fas fa-map"></i>
+                                <span class="bot-line"></span>Fields</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'sales' %}">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="bot-line"></span>Sales</a>
+                        </li>
+
+                         <li>
+                            <a href="{% url 'stock' %}">
+                                <i class="fas fa-warehouse"></i>
+                                <span class="bot-line"></span>Stock</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'transformed-products' %}">
+                                <i class="fas fa-lemon"></i>
+                                <span class="bot-line"></span>Products</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'supplies' %}">
+                                <i class="fas fa-truck"></i>
+                                <span class="bot-line"></span>Supplies</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'pests' %}">
+                                <i class="fas fa-bug"></i>
+                                <span class="bot-line"></span>Pests</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'payments' %}">
+                                <i class="fas fa-money-bill-alt"></i>
+                                <span class="bot-line"></span>Payments</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="header__tool">
+                    <a  href="{% url 'logout' %}">Log out</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END HEADER DESKTOP-->
+    <!-- HEADER MOBILE-->
+    <header class="header-mobile header-mobile-2 d-block d-lg-none">
+        <div class="header-mobile__bar">
+            <div class="container-fluid">
+                <div class="header-mobile-inner">
+                    <a class="logo" href="/">
+                        <img src="{% static 'mainapp/images/icon/logo4.png' %}" alt="IITA logo"/>
+                    </a>
+                    <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar-mobile">
+            <div class="container-fluid">
+                <ul class="navbar-mobile__list list-unstyled">
+                    <li>
+                            <a href="{% url 'farmers' %}">
+                                <i class="fas fa-users"></i>
+                                <span class="bot-line"></span>Farmers</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'fields' %}">
+                                <i class="fas fa-map"></i>
+                                <span class="bot-line"></span>Fields</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'sales' %}">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span class="bot-line"></span>Sales</a>
+                        </li>
+
+                         <li>
+                            <a href="{% url 'stock' %}">
+                                <i class="fas fa-warehouse"></i>
+                                <span class="bot-line"></span>Stock</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'transformed-products' %}">
+                                <i class="fas fa-lemon"></i>
+                                <span class="bot-line"></span>Products</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'supplies' %}">
+                                <i class="fas fa-truck"></i>
+                                <span class="bot-line"></span>Supplies</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'pests' %}">
+                                <i class="fas fa-bug"></i>
+                                <span class="bot-line"></span>Pests</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'payments' %}">
+                                <i class="fas fa-money-bill-alt"></i>
+                                <span class="bot-line"></span>Payments</a>
+                        </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="sub-header-mobile-2 d-block d-lg-none">
+       
+           
+           <div class="header__tool">
+                    <a href="{% url 'logout' %}">Log out</a>
+                </div>
+        
+    </div>
+    <!-- END HEADER MOBILE -->
+    <!-- PAGE CONTENT-->
+    <div class="page-content--bgf7">
+
+
+        {% block content %}
+
+
+        {% endblock %}
+
+        <!-- COPYRIGHT-->
+        <section class="p-t-60 p-b-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2018 IITA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END COPYRIGHT-->
+    </div>
+</div>
+<!-- Jquery JS-->
+<script src="{% static 'mainapp/vendor/jquery-3.2.1.min.js' %}"></script>
+<!-- Bootstrap JS-->
+<script src="{% static 'mainapp/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+<script src="{% static 'mainapp/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+<!-- Vendor JS       -->
+<script src="{% static 'mainapp/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'mainapp/vendor/select2/select2.min.js' %}">
+</script>
+<!-- Main JS-->
+<script src="{% static 'mainapp/js/main.js' %}"></script>
+<script type="text/javascript"  src="{% static 'mainapp/js/jquery.dataTables.js' %}"></script>
+<script type="text/javascript"  src="{% static 'mainapp/js/ellipsis.js' %}"></script>
+<script type="text/javascript"  src="{% static 'mainapp/js/sum().js' %}"></script>
+<script type="text/javascript">
+        
+        $(document).ready( function () {
+
+
+         var common =  $('.common').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             common.on( 'order.dt search.dt', function () {
+        common.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+
+             var stock_action =  $('#stock_action').DataTable({responsive: true, "columnDefs": [
+         {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        },
+        {
+            "order": [[ 1, "desc" ]]
+        } 
+
+        ]});
+
+             stock_action.on( 'order.dt search.dt', function () {
+        stock_action.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+             stock_action.on( 'search.dt', function () {
+
+     let sum = stock_action.column( 4,{ search: 'applied' } ).data().sum();
+
+    $('#total_quantity').html(`Total quantity: ${sum}`)
+
+} );
+
+
+
+    var products =  $('#products').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             products.on( 'order.dt search.dt', function () {
+        products.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    products.on( 'search.dt', function () {
+
+     let sum = products.column( 3,{ search: 'applied' } ).data().sum();
+
+    $('#total_weight').html(`Cassava weight: ${sum} kg`)
+
+} );
+
+    var sales =  $('#sales').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             sales.on( 'order.dt search.dt', function () {
+        sales.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    sales.on( 'search.dt', function () {
+
+     let sum = sales.column( 6,{ search: 'applied' } ).data().sum();
+
+    $('#total_sales').html(`Total price: ${sum} XAF`)
+
+} );
+
+
+    var supply =  $('#supply').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             supply.on( 'order.dt search.dt', function () {
+        supply.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    supply.on( 'search.dt', function () {
+
+     let sum = supply.column( 11,{ search: 'applied' } ).data().sum();
+
+    $('#total_value').html(`Total value: ${sum} XAF`)
+
+    let weight = supply.column( 10,{ search: 'applied' } ).data().sum();
+
+    $('#total_weight').html(`Total weight: ${weight} kg`)
+
+} );
+
+
+        var farmer =  $('#farmers').DataTable({responsive: true, columnDefs: [ {
+      targets: [7,8],
+      render: $.fn.dataTable.render.ellipsis( 16 )
+    } ,{
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+        farmer.on( 'order.dt search.dt', function () {
+        farmer.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+
+    } ).draw();
+
+        farmer.on( 'search.dt', function () {
+
+            let size = farmer.column( 7,{ search: 'applied' }).data().sum();
+
+        $('#total_size').html(`Total farm size: ${size} ha`);
+
+        } );
+
+
+        $('#status').change(function(){
+
+            const status = $(this).val();
+            $(this).val('');
+            window.location.href = `/fields/?status=${status}`;
+
+        });
+
+         $('#action').change(function(){
+
+            let action = $(this).val();
+
+            $(this).val('');
+            window.location.href = `/stock-action/${action}`;
+
+        });
+
+
+         var fields =  $('#fields').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             fields.on( 'order.dt search.dt', function () {
+        fields.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+             
+             
+    let size = fields.column( 11,{ search: 'applied' } ).data().sum();
+
+    $('#total_size').html(`Total cultivated area: ${size.toFixed(2)} ha`);
+
+    let yields = fields.column( 12,{ search: 'applied' } ).data().sum();
+
+    $('#total_yield').html(`Total estimated yield: ${yields.toFixed(2)} t`);
+
+    fields.on( 'search.dt', function () {
+
+     let size = fields.column( 11,{ search: 'applied' } ).data().sum();
+
+    $('#total_size').html(`Total cultivated area: ${size.toFixed(2)} ha`);
+
+    let yields = fields.column( 12,{ search: 'applied' } ).data().sum();
+
+    $('#total_yield').html(`Total estimated yield: ${yields.toFixed(2)} t`);
+
+} );
+
+    
+        } );
+
+</script>
+
+
+</body>
+
+</html>
+<!-- end document-->

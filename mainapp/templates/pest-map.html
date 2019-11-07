@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<!--maps-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-4">Carte des ravageurs
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div style="height: 400px;width: 100%;" id="pests_map"></div>
+            </div>
+        </div>
+    </div>
+   
+</section>
+<!--end maps -->
+<script>
+// Initialize and add the map
+function initMap() {
+    // The locations
+    const cameroon = { lat: 7.3696, lng: 12.3446 };
+    const congo = { lat: 3.6606, lng: 14.8966 }
+
+
+    const pests_map = new google.maps.Map(
+        document.getElementById('pests_map'), { zoom: 4, center: cameroon });
+
+
+    // The field markers
+    let markers = [
+        {% for pest in pests %}
+              new google.maps.Marker({ position:  { lat: {{pest.geolocation.0}}, lng: {{pest.geolocation.1}} }, map: pests_map, icon: { url: "http://maps.google.com/mapfiles/kml/pal4/icon49.png",scaledSize: new google.maps.Size(18, 18) } })
+    .addListener('click', function(e) {
+       new google.maps.InfoWindow({
+          content: "Customer name: {{pest|get_item:'details/customer_firstName'}} {{pest|get_item:'details/customer_surName'}}<br>Total price: {{pest.totalPrice}} XAF<br>Products: {{pest.products}} "
+        }).open(pests_map, this);
+    }) ,
+    {% endfor %}
+    ]
+  
+}
+
+</script>
+
+
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc2v8qMx-9ghIjw0MikfoiSgfak3WKHHA&callback=initMap">
+</script>
+{% endblock %}

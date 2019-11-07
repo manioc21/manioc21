@@ -1,0 +1,1 @@
+web: gunicorn moniac.wsgi --log-file -

@@ -1,0 +1,46 @@
+
+{% extends 'base.html'  %}   
+
+
+{% block content %}
+
+            <!-- DATA TABLE-->
+            <section class="p-t-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="m-b-5">comptes utilisateur</h2>
+                              <a class="btn btn-secondary" href="{% url 'create-account' %}">ajouter un utilisateur</a>
+                            
+                            <div class="table-responsive ">
+                                <table class="table table-data2" id="payments">
+                                    <thead>
+                                        <tr >
+                                            <th >Nom d'utilisateur</th>
+                                            <th >Noms</th>
+                                            <th >Prenoms</th>
+                                            <th >Numero de telephone</th>
+                                            <th >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        <tr class="tr-shadow">
+                                            <td>{{user.username}}</td>
+                                            <td>{{user.fname}}</td>
+                                            <td>{{user.lname}}</td>
+                                            <td>{{user.phone}}</td>
+                                            <td><a href="{% url 'user-accounts' %}?id={{user.id}}">effacer</a></td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END DATA TABLE-->
+
+{% endblock %}

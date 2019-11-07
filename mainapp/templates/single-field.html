@@ -1,0 +1,206 @@
+{% extends 'base.html'  %}
+
+
+{% block content %}
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="m-b-5">détails des champs</h2>
+
+                <div class="table-data__tool float-right">
+                               
+                                <div class="table-data__tool-right">
+                                    <button onclick="window.print()" class="btn btn-secondary">
+                                        publier</button>
+                                </div>
+                            </div>
+
+                <div class="table-responsive ">
+                    <table class="table table-bordered" id="payments">
+
+                        <tbody>
+
+                        <tr class="tr-shadow">
+                            <td >Nom</td>
+
+                            <td>{{field.data.fieldName}}</td>
+                        </tr>
+
+                      
+
+                        <tr class="tr-shadow">
+                            <td>le nom du propriétaire</td>
+                            <td><a href="{% url 'single-farmer' field|get_field_owner_id %}">{{field|get_field_owner}}</a></td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>emplacement</td>
+                            <td><a href="#mapModal" data-toggle="modal">field map</a></td>
+                        </tr>
+
+
+                        <tr class="tr-shadow">
+                            <td>date de plantation</td>
+                            <td>{{field.data.plantingdate}}</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>date de récolte</td>
+                            <td>{{field.data.harvestdate}}</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>statut</td>
+                            <td {% if field.status == 'ready' %} class="text-success"{% endif %}>
+                                {{field.get_status_display}}
+                            </td>
+                        </tr>
+
+                         <tr class="tr-shadow">
+                            <td>COOP</td>
+                            <td>
+                                {{field.data.coop}}
+                            </td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>propriétaire</td>
+                            <td>
+                                {{field.data.owner}}
+                            </td>
+                        </tr>
+                        <tr class="tr-shadow">
+                            <td>type de propriété</td>
+                            <td>
+                                {{field.data.ownershipType}}
+                            </td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>LE MANAGER</td>
+                            <td>{{field.data.manager}}</td>
+                        </tr>
+
+                       
+
+                         <tr class="tr-shadow">
+                            <td>Variete de manioc</td>
+                            <td>{% if field.data.variety %}
+                                                {{field.data.variety}}
+                                            {% elif field.data.variety_other %}
+                                                {{field.data.variety_other}}
+
+                                            {% else %}
+                                                I don't know
+                                            {% endif %}</td>
+                        </tr>
+
+                         <tr class="tr-shadow">
+                            <td>SOURCE</td>
+                            <td>{% if field.data.source_name %}
+                                            {{field.data.source_name}}
+                                            {% else %}
+                                                {{field.data.source}}
+                                            {% endif %}</td>
+                        </tr>
+
+                         <tr class="tr-shadow">
+                            <td>taille</td>
+                            <td>{{field.data.area_ha|roundoff}} ha</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>Production estimee</td>
+                            <td>{{field.data.area_ha|roundoff|calculate_yield}} t</td>
+                        </tr>
+
+                       
+
+                         <tr class="tr-shadow">
+                            <td>Date d’enregistrement</td>
+                            <td>{{field.data.today}}</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>Enregistre par</td>
+                            <td><a href="{% url 'single-farmer' field|get_field_registrar_id %}">{{field|get_field_registrar}}</a></td>
+                        </tr>
+                       
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Maps</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <div class="container">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div style="height: 400px;width: 100%;" id="fields_map"></div>
+            </div>
+        </div>
+    </div>
+   </div>
+</div>
+</div>
+</div>
+
+<!--end maps -->
+
+
+<script>
+// Initialize and add the map
+function initMap() {
+    // The locations
+
+    const fields_map = new google.maps.Map(
+        document.getElementById('fields_map'), { zoom: 18, center: { lat: {{field.data.geolocation.0}}, lng: {{field.data.geolocation.1}} } });
+
+
+
+    var fieldCoordinates = [
+            {% for point in points %}
+          {lat: {{point.lat}}, lng: {{point.lng}} },
+          {% endfor %}
+        ];
+        var fieldPath = new google.maps.Polyline({
+          path: fieldCoordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 1
+        });
+
+        fieldPath.setMap(fields_map);
+  
+}
+
+</script>
+
+
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc2v8qMx-9ghIjw0MikfoiSgfak3WKHHA&callback=initMap">
+</script>
+    
+
+{% endblock %}

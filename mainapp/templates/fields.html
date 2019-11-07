@@ -1,0 +1,131 @@
+{% extends 'base.html'  %}   
+
+
+{% block content %}
+
+            <!-- DATA TABLE-->
+            <section class="p-t-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="m-b-5">Les champs</h2>
+                              
+                          
+                                
+
+                            <div class="table-data__tool">
+
+                    <div class="table-data__tool-right">
+
+                         
+                     <button onclick="window.print()" class="btn btn-secondary">
+                                        publier</button>
+                    </div>
+                                      
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select id="status" class="js-select2" name="property">
+                                            <option selected="selected">filtre</option>
+                                            <option value="">tous</option>
+                                            <option value="ready">Champs matures</option>
+                                            <option value="not_ready">Champs non matures
+</option>
+                                            <option value="harvest">Camps recoltes</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                    
+
+                                    <h4 id="total_size">
+                            superficie totale cultivée: {{total_price}} ha
+                        </h4>
+                        <h4 id="total_yield">
+                            rendement total estimé: {{total_price}} t
+                        </h4>
+                    <a href="{% url 'fields-map' %}" class="btn btn-success">Carte des champs</a>
+                      
+                
+            </div>
+
+
+
+
+                            <div class="table-responsive ">
+                                <table class="table table-striped" id="fields" >
+                                    <thead>
+                                        <tr bgcolor="green">
+                                            <th class="text-white">N°</th>
+                                            <th class="text-white">nom de champs</th>
+                                            <th class="text-white">
+propriétaire</th>
+                                            <th class="text-white">date de plantation</th>
+                                            <th class="text-white">date de récolte</th>
+                                            <th class="text-white">statut</th>
+                                            <th class="text-white">propriétaire</th>
+                                            <th class="text-white">Coop</th>
+                                            <th class="text-white">le Manager</th>
+                                            <th class="text-white">Variete de manioc</th>
+                                            <th class="text-white">Source</th>
+                                            <th class="text-white">Taille</th>
+                                           <th class="text-white">Production estimee</th>
+                                            <th class="text-white">Date d’enregistrement</th>
+                                            <th class="text-white">Enregistre par</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {% for field in fields %}
+                                        <tr class="tr-shadow">
+                                            <td>{{forloop.counter}}</td>
+                                            <td><a href="{% url 'single-field' field.data|get_item:'_id' %}">{{field.data.fieldName}}</a></td>
+                                            <td><a href="{% url 'single-farmer' field|get_field_owner_id %}">{{field|get_field_owner}}</a></td>
+                                            <td>{{field.data.plantingdate}}</td>
+                                            <td>{{field.data.harvestdate}}</td>
+                                             <td {% if field.status == 'ready' %} class="text-success"{% endif %}>{{field.get_status_display}}</td>
+
+                                            <td>{{field.data.owner}}</td>
+                                            <td>{{field.data.coop}}</td>
+                                          
+                                            <td>{{field.data.manager}}</td>
+                                            
+                                            <td>
+                                                {% if field.data.variety %}
+                                                {{field.data.variety}}
+                                            {% elif field.data.variety_other %}
+                                                {{field.data.variety_other}}
+
+                                            {% else %}
+                                                I don't know
+                                            {% endif %}</td>
+                                            <td>
+                                                {% if field.data.source_name %}
+                                            {{field.data.source_name}}
+                                            {% else %}
+                                                {{field.data.source}}
+                                            {% endif %}
+                                        </td>
+                                            <td>
+                                                {{field.data.area_ha|roundoff}} ha
+                                            </td>
+                                            <td>
+                                                {{field.data.area_ha|roundoff|calculate_yield}} t
+                                            </td>
+                                           
+                                            <td>{{field.data.today}}</td>
+                                            <td><a href="{% url 'single-farmer' field|get_field_registrar_id %}">{{field|get_field_registrar}}</a></td>
+
+                                        </tr>
+                                        {% endfor %}
+                                       
+                                        
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END DATA TABLE-->
+
+{% endblock %}

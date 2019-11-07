@@ -1,0 +1,5 @@
+db.sqlite3
+__pycache__/
+*.py[cod]
+!mainapp/migrations/__init__.py
+mainapp/migrations/*

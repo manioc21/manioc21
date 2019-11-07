@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+{% load dictionary_tags %}
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Moniac 21">
+    <meta name="author" content="Daniel kakai">
+    <!-- Title Page-->
+    <title>Moniac 21</title>
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'mainapp/css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'mainapp/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'mainapp/vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'mainapp/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet"
+          media="all">
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'mainapp/vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+    <!-- Vendor CSS-->
+    <link href="{% static 'mainapp/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'mainapp/css/jquery.dataTables.css' %}" media="all">
+    <link rel="stylesheet" type="text/css" href="{% static 'mainapp/css/dataTables.fontAwesome.css' %}" media="all">
+    <link href="{% static 'mainapp/css/theme.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body >
+<div class="page-wrapper">
+    <!-- HEADER DESKTOP-->
+   
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-success">
+
+  <a class="navbar-brand" href="/">
+    <img src="{% static 'mainapp/images/icon/logo4.png' %}" class="d-inline-block align-top" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse header__navbar" id="navbarNav">
+    <ul class="navbar-nav">
+       <li class="nav-item">
+                            <a  href="{% url 'farmers' %}">
+                                <i class="fas fa-users"></i>
+                                Les membres</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a  href="{% url 'fields' %}">
+                                <i class="fas fa-map"></i>
+                                Les champs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a  href="{% url 'sales' %}">
+                                <i class="fas fa-shopping-bag"></i>
+                                Les ventes</a>
+                        </li>
+
+                         <li class="nav-item">
+                            <a  href="{% url 'stock' %}">
+                                <i class="fas fa-warehouse"></i>
+                                Le stock</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'transformed-products' %}">
+                                <i class="fas fa-lemon"></i>
+                                Produits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'supplies' %}">
+                                <i class="fas fa-truck"></i>
+                                Les livraisons de racine</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'pests' %}">
+                                <i class="fas fa-bug"></i>
+                                Ravageurs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{% url 'payments' %}">
+                                <i class="fas fa-money-bill-alt"></i>
+                                Payement </a>
+                        </li>
+
+
+                        
+    </ul>
+    <ul class="navbar-nav navbar-right">
+         <li class="nav-item dropdown">
+        <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{request.user.username}} account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a style="color:black;" class="dropdown-item" href="{% url 'change-password' %}">Changer le mot de passe</a>
+          <div class="dropdown-divider"></div>
+          <a style="color:black;" class="dropdown-item" href="{% url 'logout' %}">Se deconnecter</a>
+          <div class="dropdown-divider"></div>
+          {% if request.user.coop_admin %}
+          <a style="color:black;" class="dropdown-item" href="{% url 'user-accounts' %}">comptes utilisateur</a>
+          {% endif %}
+        </div>
+      </li>
+   </ul>
+  </div>
+</nav>
+        
+    <!-- END HEADER DESKTOP-->
+    
+    <!-- PAGE CONTENT-->
+    <div class="page-content--bgf7">
+
+
+        {% block content %}
+
+
+        {% endblock %}
+
+        <!-- COPYRIGHT-->
+        <section class="p-t-60 p-b-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2018 IITA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END COPYRIGHT-->
+    </div>
+</div>
+<!-- Jquery JS-->
+<script src="{% static 'mainapp/vendor/jquery-3.2.1.min.js' %}"></script>
+<!-- Bootstrap JS-->
+<script src="{% static 'mainapp/vendor/bootstrap-4.1/popper.min.js' %}"></script>
+<script src="{% static 'mainapp/vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+<!-- Vendor JS       -->
+<script src="{% static 'mainapp/vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'mainapp/vendor/select2/select2.min.js' %}">
+</script>
+<!-- Main JS-->
+<script src="{% static 'mainapp/js/main.js' %}"></script>
+<script type="text/javascript"  src="{% static 'mainapp/js/jquery.dataTables.js' %}"></script>
+<script type="text/javascript"  src="{% static 'mainapp/js/ellipsis.js' %}"></script>
+<script type="text/javascript"  src="{% static 'mainapp/js/sum().js' %}"></script>
+<script type="text/javascript">
+        
+        $(document).ready( function () {
+
+
+         var common =  $('.common').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             common.on( 'order.dt search.dt', function () {
+        common.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+
+             var stock_action =  $('#stock_action').DataTable({responsive: true, "columnDefs": [
+         {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        },
+        {
+            "order": [[ 1, "desc" ]]
+        } 
+
+        ]});
+
+             stock_action.on( 'order.dt search.dt', function () {
+        stock_action.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+             stock_action.on( 'search.dt', function () {
+
+     let sum = stock_action.column( 4,{ search: 'applied' } ).data().sum();
+
+    $('#total_quantity').html(`quantité totale: ${sum}`)
+
+} );
+
+
+
+    var products =  $('#products').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             products.on( 'order.dt search.dt', function () {
+        products.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    products.on( 'search.dt', function () {
+
+     let sum = products.column( 3,{ search: 'applied' } ).data().sum();
+
+    $('#total_weight').html(`poids de manioc: ${sum} kg`)
+
+} );
+
+    var sales =  $('#sales').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             sales.on( 'order.dt search.dt', function () {
+        sales.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    sales.on( 'search.dt', function () {
+
+     let sum = sales.column( 6,{ search: 'applied' } ).data().sum();
+
+    $('#total_sales').html(`Total price: ${sum} XAF`)
+
+} );
+
+
+    var supply =  $('#supply').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             supply.on( 'order.dt search.dt', function () {
+        supply.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+    supply.on( 'search.dt', function () {
+
+     let sum = supply.column( 11,{ search: 'applied' } ).data().sum();
+
+    $('#total_value').html(`Total value: ${sum} XAF`)
+
+    let weight = supply.column( 10,{ search: 'applied' } ).data().sum();
+
+    $('#total_weight').html(`Total weight: ${weight} kg`)
+
+} );
+
+
+        var farmer =  $('#farmers').DataTable({responsive: true, columnDefs: [ {
+      targets: [7,8],
+      render: $.fn.dataTable.render.ellipsis( 16 )
+    } ,{
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+        farmer.on( 'order.dt search.dt', function () {
+        farmer.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+
+    } ).draw();
+
+        farmer.on( 'search.dt', function () {
+
+            let size = farmer.column( 7,{ search: 'applied' }).data().sum();
+
+        $('#total_size').html(`Total farm size: ${size} ha`);
+
+        } );
+
+
+        $('#status').change(function(){
+
+            const status = $(this).val();
+            $(this).val('');
+            window.location.href = `/fields/?status=${status}`;
+
+        });
+
+         $('#action').change(function(){
+
+            let action = $(this).val();
+
+            $(this).val('');
+            window.location.href = `/stock-action/${action}`;
+
+        });
+
+
+         var fields =  $('#fields').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]});
+
+             fields.on( 'order.dt search.dt', function () {
+        fields.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+
+             
+             
+    let size = fields.column( 11,{ search: 'applied' } ).data().sum();
+
+    $('#total_size').html(`superficie totale cultivée: ${size.toFixed(2)} ha`);
+
+    let yields = fields.column( 12,{ search: 'applied' } ).data().sum();
+
+    $('#total_yield').html(`rendement total estimé: ${yields.toFixed(2)} t`);
+
+    fields.on( 'search.dt', function () {
+
+     let size = fields.column( 11,{ search: 'applied' } ).data().sum();
+
+    $('#total_size').html(`superficie totale cultivée: ${size.toFixed(2)} ha`);
+
+    let yields = fields.column( 12,{ search: 'applied' } ).data().sum();
+
+    $('#total_yield').html(`rendement total estimé: ${yields.toFixed(2)} t`);
+
+} );
+
+    
+        } );
+
+</script>
+
+
+</body>
+
+</html>
+<!-- end document-->
