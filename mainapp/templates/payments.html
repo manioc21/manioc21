@@ -16,7 +16,6 @@
                                 <table class="table table-data2" id="payments">
                                     <thead>
                                         <tr >
-                                            <th >ID</th>
                                             <th >Nom</th>
                                             <th >Numero de telephone</th>
                                             <th >montant</th>
@@ -25,15 +24,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        {% for payment in payments %}
                                         <tr class="tr-shadow">
-                                            <td>5464</td>
-                                            <td>dan kakai</td>
-                                            <td>07376455</td>
-                                            <td>77838.737</td>
-                                            <td>2018</td>
+
+                                            
+                                            <td>{{payment.farmer.data|get_item:'details/firstName'}} {{payment.farmer.data|get_item:'details/surName'}}</td>
+                                            <td>{{payment.farmer.data|get_item:'details/phoneNr'}}</td>
+                                            <td>{{payment.amount}}</td>
+                                            <td>{{payment.date}}</td>
+                                            
                                           
                                         </tr>
+                                        {% endfor %}
 
                                     </tbody>
                                 </table>

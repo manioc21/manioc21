@@ -156,13 +156,13 @@ def available_stock(coop):
 	count = Stock.objects.filter(data__action='count',data__coop=coop).order_by('-data__end').values_list('data', flat=True).last()
 	date = count['end']
 	received = Stock.objects.filter(data__action='receive',data__end__gt=date,data__coop=coop).values_list('data', flat=True)
-	received = format_stock(received)
+	#received = format_stock(received)
 	withdraw = Stock.objects.filter(data__action='withdraw',data__end__gt=date,data__coop=coop).values_list('data', flat=True)
-	withdraw = format_stock(withdraw)
+	#withdraw = format_stock(withdraw)
 	for data in received:
 		total_q = 0
 		for item in count['productDetails']:
-			if data['productDetails/product'] == item['productDetails/product'] and data.get('productDetails/unit',data.get('productDetails/productUnit')) == item.get('productDetails/unit',item.get('productDetails/productUnit')) and data['productDetails/weight'] == item['productDetails/weight']:
+			if data.get('productDetails/product') == item.get('productDetails/product') and data.get('productDetails/unit',data.get('productDetails/productUnit')) == item.get('productDetails/unit',item.get('productDetails/productUnit')) and data['productDetails/weight'] == item['productDetails/weight']:
 				item['productDetails/quantity'] += data['productDetails/quantity']
 			else:
 				count['productDetails'].append(item)
@@ -178,7 +178,7 @@ def available_stock(coop):
 def stock_action(request,action):
 	data = []
 	if action == 'available':
-		data = available_stock(request.user.coop)
+		data = []
 	elif action == "all":
 		return redirect('stock')
 	else:
@@ -306,7 +306,8 @@ def products_map(request):
 
 
 def payments(request):
-	return render(request,"payments.html")\
+	payments = Payment.objects.all().order_by('-id')
+	return render(request,"payments.html",{'payments':payments})\
 
 
 @login_required(login_url='login')
@@ -387,6 +388,20 @@ def webhook(request,table):
 
 
 from twilio import twiml
+from twilio.rest import Client
+
+account_sid = 'AC7b51a9cc420d32ee6229500545514c72'
+auth_token = '1d8874b35ffa59783241557033b1e02d'
+client = Client(account_sid, auth_token)
+
+def send_sms(body,to):
+	message = client.messages.create(
+                              body=body,
+                              from_='+14076412173',
+                              to=to
+                          )
+	
+
 
 @csrf_exempt
 def message(request):
@@ -394,7 +409,6 @@ def message(request):
 	phone = request.POST.get('From')
 	message = Message(body=body,phone=phone)
 	message.save()
-	msg = handle_sms(request,body,phone)
-	#resp = twiml.Response()
-	#resp.message(msg)
+	msg = handle_sms(body,phone)
+	send_sms(msg,phone)
 	return HttpResponse(msg)

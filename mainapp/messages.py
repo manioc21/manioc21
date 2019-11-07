@@ -2,36 +2,71 @@ from mainapp.models import *
 
 
 def find_fields(phone):
-    phone = phone.replace('+','')
-    farmer = Farmer.objects.filter(data__contains=[{'details/phoneNr',phone}]).last()
-    fields = Field.objects.filter(data__CMID=farmer.data['CMID'])
-    message = "Choose action:\n"
-    for index,field in enumerate(fields):
-    	message += "\n{index}. {name} is ready".format(index,field.data['fieldName'])
-    length = len(fields)
-    for field in fields:
-    	message += "\n{index}. {name} is harvested".format(length,field.data['fieldName'])
-    	length += 1
+    farmer = Farmer.objects.filter(data__contains={'details/phoneNr': phone}).last()
+    fields = Field.objects.filter(data__CMID=farmer.data['CMID']).order_by('-id')
+    message = "Choose field:\n"
+    for i,field in enumerate(fields):
+        message += "\n{}. {}".format(i,field.data['fieldName'])
     return message
 
 
-def handle_sms(request,message,phone):
+def get_fields(phone):
+    farmer = Farmer.objects.filter(data__contains={'details/phoneNr': phone}).last()
+    fields = Field.objects.filter(data__CMID=farmer.data['CMID']).order_by('-id')
+    return fields
+
+
+def handle_sms( message, phone):
+    phone = phone.replace('+', '')
     message = message.strip()
-    if not request.session.get('page'):
-        request.session['page'] = 1
+    chat = Chat.objects.filter(phone=phone).last()
+    if not chat:
+        chat = Chat.objects.create(phone=phone, page=1)
         return "Choose :\n 1. Fields \n2. Payments"
-    elif request.session.get('page') == 1:
-        if int(message) == 1:
-        	request.session['page'] == 2
-        	return find_fields(phone)
-        elif int(message) == 2:
-        	request.session['page'] = 3
-        	return "Enter amount you want"
+    elif chat.page == 1:
+        if message == '1':
+            chat.page = 2
+            chat.save()
+            return find_fields(phone)
+        elif message == '2':
+            chat.page = 3
+            chat.save()
+            return "Enter amount you want"
         else:
-        	return "Choose :\n 1. Fields \n2. Payments"
-    elif request.message.get('page') == 3:
-    	if message != '':
-    		return "payment request recieved"
-
-
-
+            chat.delete()
+            return "Choose :\n 1. Fields \n2. Payments"
+    elif chat.page == 2:
+        try:
+            n = int(message)
+            field = get_fields(phone)[n]
+            chat.page = 4
+            chat.field = n
+            chat.save()
+            return "choose action for {}\n 1. field is ready\n 2. field is harvested".format(field.data['fieldName'])
+        except:
+            return "Enter correct field! \n"+find_fields(phone)
+    elif chat.page == 3:
+        try:
+            amount = int(message)
+            farmer = Farmer.objects.filter(data__contains={'details/phoneNr': phone}).last()
+            p = Payment.objects.create(farmer=farmer,amount=amount)
+            chat.delete()
+            return "payment request for {} recieved, Thank you".format(amount)
+        except:
+            return "Enter correct amount"
+    elif chat.page == 4:
+        field_num = chat.field
+        try:
+            n = int(message)
+            field = get_fields(phone)[field_num]
+            if n == 1:
+                field.status = 'ready'
+            elif n == 2:
+                field.status = 'harvest'
+            else:
+                return "choose correct status"
+            field.save()
+            chat.delete()
+            return "field status updated for {}".format(field.data['fieldName'])
+        except:
+            return "choose correct status"

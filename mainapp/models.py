@@ -32,7 +32,7 @@ class Field(models.Model):
     status = models.CharField(max_length=50,default='not_ready',choices=FIELD_STATUS)
 
 class Payment(models.Model):
-    farmer = models.ForeignKey(User,on_delete=models.CASCADE)
+    farmer = models.ForeignKey(Farmer,on_delete=models.CASCADE)
     amount = models.FloatField()
     date = models.DateTimeField(auto_now=True)
 
@@ -62,3 +62,9 @@ class Message(models.Model):
     date = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.body
+
+
+class Chat(models.Model):
+    phone = models.CharField(max_length=50)
+    page = models.IntegerField()
+    field = models.IntegerField(null=True)

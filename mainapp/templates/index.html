@@ -83,7 +83,8 @@ function initMap() {
     // The field markers
     let markers1 = [
         {% for field in fields %}
-              new google.maps.Marker({ position:  { lat: {{field.data.geolocation.0}}, lng: {{field.data.geolocation.1}} }, map: fields_map, icon: { url:{% if field.status == 'ready' %}"https://maps.google.com/mapfiles/ms/icons/green-dot.png"{% else %}"https://maps.google.com/mapfiles/ms/icons/red-dot.png"{% endif %} ,scaledSize: new google.maps.Size(18, 18)} })
+              new google.maps.Marker({ position:  { lat: {{field.data.geolocation.0}}, lng: {{field.data.geolocation.1}} }, map: fields_map, icon: { url:{% if field.status == 'ready' %}"https://maps.google.com/mapfiles/ms/icons/green-dot.png"{% elif field.status == 'harvest' %}
+              "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png" {% else %}"https://maps.google.com/mapfiles/ms/icons/red-dot.png"{% endif %} ,scaledSize: new google.maps.Size(18, 18)} })
     .addListener('click', function(e) {
        new google.maps.InfoWindow({
           content: "nom de champs: {{field.data.fieldName}}<br>propriétaire: {{field.data.coop}}<br> Area_ha: {{field.data.area_ha|roundoff}} ha <br> date de plantation: {{field.data.plantingdate}} <br> date de récolte: {{field.data.harvestdate}} "
