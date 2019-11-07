@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'moniac.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgresql-trapezoidal-16672',
+        'NAME': 'postgresql-acute-54160',
         'USER': 'postgres',
         'PASSWORD': 'mylenana',
         'HOST': 'localhost',
