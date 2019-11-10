@@ -4,7 +4,7 @@ from mainapp.models import *
 def find_fields(phone):
     farmer = Farmer.objects.filter(data__contains={'details/phoneNr': phone}).last()
     fields = Field.objects.filter(data__CMID=farmer.data['CMID']).order_by('-id')
-    message = "Choose field:\n"
+    message = "Choicez les Champs:\n"
     for i,field in enumerate(fields):
         message += "\n{}. {}".format(i+1,field.data['fieldName'])
     return message
@@ -22,10 +22,10 @@ def handle_sms( message, phone):
     chat = Chat.objects.filter(phone=phone).last()
     if not chat:
         chat = Chat.objects.create(phone=phone, page=1)
-        return "Choose :\n1. Fields \n2. Payments\n\n0. exit"
+        return "Choisez :\n1. Les Champs \n2. Payement\n\n0. sortie"
     elif int(message) == 0:
         chat.delete()
-        return "session ended"
+        return "session terminée"
     elif chat.page == 1:
         if message == '1':
             chat.page = 2
@@ -34,10 +34,10 @@ def handle_sms( message, phone):
         elif message == '2':
             chat.page = 3
             chat.save()
-            return "Enter amount you want"
+            return "Entrez le montant que vous voulez"
         else:
             chat.delete()
-            return "Choose :\n1. Fields \n2. Payments\n\n0. exit"
+            return "Choisez :\n1. Les Champs \n2. Payement\n\n0. sortie"
     elif chat.page == 2:
         try:
             n = int(message) -1
@@ -45,18 +45,18 @@ def handle_sms( message, phone):
             chat.page = 4
             chat.field = n
             chat.save()
-            return "choose action for {}\n1. field is ready\n2. field is harvested\n\n0. exit".format(field.data['fieldName'])
+            return "choisir une action pour {}\n1. le champ est prêt\n2. le champ est récolté\n\n0. sortie".format(field.data['fieldName'])
         except:
-            return "Enter correct field! \n"+find_fields(phone)
+            return "Entrez le champ correct! \n"+find_fields(phone)
     elif chat.page == 3:
         try:
             amount = int(message)
             farmer = Farmer.objects.filter(data__contains={'details/phoneNr': phone}).last()
             p = Payment.objects.create(farmer=farmer,amount=amount)
             chat.delete()
-            return "payment request for {} recieved, Thank you".format(amount)
+            return "demande de paiement pour {} reçu, merci".format(amount)
         except:
-            return "Enter correct amount"
+            return "Entrez le montant correct\n\n0. sortie"
     elif chat.page == 4:
         field_num = chat.field
         try:
@@ -67,9 +67,9 @@ def handle_sms( message, phone):
             elif n == 2:
                 field.status = 'harvest'
             else:
-                return "choose correct status"
+                return "choisir le bon statut\n\n0. sortie"
             field.save()
             chat.delete()
-            return "field status updated for {}".format(field.data['fieldName'])
+            return "statut du champ mis à jour pour {}".format(field.data['fieldName'])
         except:
-            return "choose correct status"
+            return "choisir le bon statut\n\n0. sortie"
