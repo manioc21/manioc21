@@ -12,6 +12,9 @@ class Command(BaseCommand):
         for field in fields:
             try:
                 coop,created = User.objects.get_or_create(username=field['coop'],coop=field['coop'])
+                if created:
+                    coop.set_password('admin')
+                    coop.save()
                 TransformedProduct.objects.get_or_create(coop=coop,data=field)
             except KeyError:
                 self.stdout.write("key error")

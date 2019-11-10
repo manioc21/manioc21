@@ -12,6 +12,9 @@ class Command(BaseCommand):
         for farmer in farmers:
             try:
                 coop,created = User.objects.get_or_create(username=farmer['coop'],coop=farmer['coop'])
+                if created:
+                    coop.set_password('admin')
+                    coop.save()
                 Farmer.objects.get_or_create(coop=coop,data=farmer)
             except KeyError:
                 self.stdout.write("key error")

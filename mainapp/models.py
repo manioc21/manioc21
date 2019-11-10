@@ -5,9 +5,9 @@ from authenticate.models import User
 # Create your models here.
 
 FIELD_STATUS = (
-    ('ready','Ready'),
-    ('not_ready','Not ready'),
-    ('harvest','Harvest')
+    ('ready','Mature'),
+    ('not_ready','Non mature'),
+    ('harvest','Deja recolte')
 )
 
 FARMER_STATUS = (

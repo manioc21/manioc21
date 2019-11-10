@@ -39,7 +39,7 @@ function initMap() {
               new google.maps.Marker({ position:  { lat: {{pest.geolocation.0}}, lng: {{pest.geolocation.1}} }, map: pests_map, icon: { url: "http://maps.google.com/mapfiles/kml/pal4/icon49.png",scaledSize: new google.maps.Size(18, 18) } })
     .addListener('click', function(e) {
        new google.maps.InfoWindow({
-          content: "Customer name: {{pest|get_item:'details/customer_firstName'}} {{pest|get_item:'details/customer_surName'}}<br>Total price: {{pest.totalPrice}} XAF<br>Products: {{pest.products}} "
+          content: "Nom de membre: {{pest|get_name_from_cmid}} <br>Nom de champs: {{pest.fieldID|get_pest_field}}<br>maladie: {{pest.pestDiseases}} "
         }).open(pests_map, this);
     }) ,
     {% endfor %}

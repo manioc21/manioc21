@@ -26,8 +26,6 @@
                                     <tbody>
                                         {% for payment in payments %}
                                         <tr class="tr-shadow">
-
-                                            
                                             <td>{{payment.farmer.data|get_item:'details/firstName'}} {{payment.farmer.data|get_item:'details/surName'}}</td>
                                             <td>{{payment.farmer.data|get_item:'details/phoneNr'}}</td>
                                             <td>{{payment.amount}}</td>

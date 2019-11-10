@@ -12,7 +12,7 @@
     <meta name="description" content="Moniac 21">
     <meta name="author" content="Daniel kakai">
     <!-- Title Page-->
-    <title>Moniac 21</title>
+    <title>Manioc 21</title>
     <!-- Fontfaces CSS-->
     <link href="{% static 'mainapp/css/font-face.css' %}" rel="stylesheet" media="all">
     <link href="{% static 'mainapp/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
@@ -74,7 +74,7 @@
                         <li class="nav-item">
                             <a  href="{% url 'supplies' %}">
                                 <i class="fas fa-truck"></i>
-                                Les livraisons de racine</a>
+                                Livraisons de racine</a>
                         </li>
                         <li class="nav-item">
                             <a  href="{% url 'pests' %}">
@@ -93,7 +93,7 @@
     <ul class="navbar-nav navbar-right">
          <li class="nav-item dropdown">
         <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{request.user.username}} account
+          Compte {{request.user.username}} 
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a style="color:black;" class="dropdown-item" href="{% url 'change-password' %}">Changer le mot de passe</a>
@@ -149,6 +149,8 @@
 <script type="text/javascript"  src="{% static 'mainapp/js/jquery.dataTables.js' %}"></script>
 <script type="text/javascript"  src="{% static 'mainapp/js/ellipsis.js' %}"></script>
 <script type="text/javascript"  src="{% static 'mainapp/js/sum().js' %}"></script>
+
+{% if table %}
 <script type="text/javascript">
         
         $(document).ready( function () {
@@ -348,10 +350,15 @@
     
         } );
 
-var payments =  $('#payments').DataTable()
+var payments =  $('#payments').DataTable({responsive: true, "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0,
+            "iDisplayLength": 100
+        } ]})
 
 </script>
-
+{% endif %}
 
 </body>
 
