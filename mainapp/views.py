@@ -153,7 +153,7 @@ def format_stock(stocks):
 
 
 def available_stock(coop):
-	count = Stock.objects.filter(data__action='count',data__coop=coop).order_by('-data__end').values_list('data', flat=True).last()
+	count = Stock.objects.filter(data__action='count',data__coop=coop).order_by('data__end').values_list('data', flat=True).last()
 	date = count['end']
 	received = Stock.objects.filter(data__action='receive',data__end__gt=date,data__coop=coop).values_list('data', flat=True)
 	withdraw = Stock.objects.filter(data__action='withdraw',data__end__gt=date,data__coop=coop).values_list('data', flat=True)
@@ -166,7 +166,7 @@ def available_stock(coop):
 
 
 def available_stock_all():
-	count = Stock.objects.filter(data__action='count').order_by('-data__end').values_list('data', flat=True).last()
+	count = Stock.objects.filter(data__action='count').order_by('data__end').values_list('data', flat=True).last()
 	date = count['end']
 	received = Stock.objects.filter(data__action='receive',data__end__gt=date).values_list('data', flat=True)
 	withdraw = Stock.objects.filter(data__action='withdraw',data__end__gt=date).values_list('data', flat=True)
