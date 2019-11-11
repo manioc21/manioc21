@@ -229,7 +229,7 @@
 
      let sum = sales.column( 6,{ search: 'applied' } ).data().sum();
 
-    $('#total_sales').html(`Total price: ${sum} XAF`)
+    $('#total_sales').html(`Valeur totale: ${sum} XAF`)
 
 } );
 
@@ -251,11 +251,11 @@
 
      let sum = supply.column( 11,{ search: 'applied' } ).data().sum();
 
-    $('#total_value').html(`Total value: ${sum} XAF`)
+    $('#total_value').html(`Valeur totale: ${sum} XAF`)
 
     let weight = supply.column( 10,{ search: 'applied' } ).data().sum();
 
-    $('#total_weight').html(`Total weight: ${weight} kg`)
+    $('#total_weight').html(`Poids total: ${weight} kg`)
 
 } );
 
@@ -281,7 +281,7 @@
 
             let size = farmer.column( 7,{ search: 'applied' }).data().sum();
 
-        $('#total_size').html(`Total farm size: ${size} ha`);
+        $('#total_size').html(`Superficie total: ${size} ha`);
 
         } );
 
