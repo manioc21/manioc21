@@ -268,7 +268,7 @@ def supplies(request):
 	total_value = 0
 	total_weight = 0
 	for supply in supplies:
-		total_value += int(supply['totalDelivery/totalValue'].replace(' XAF',''))
+		total_value += int(supply['totalDelivery/totalValue'].replace(' XAF','').replace(' CDF',''))
 		total_weight += float(supply['totalDelivery/totalWeight'].replace(' kg',''))
 	return render(request,"supplies.html",{'supplies':supplies,'table':True,'total_value':total_value,'total_weight':total_weight})
 
