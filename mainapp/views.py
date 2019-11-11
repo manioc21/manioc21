@@ -194,10 +194,7 @@ def stock_action(request,action):
 		if request.user.is_admin == False:
 			stocks = stocks.filter(data__coop=request.user.coop)
 		data = format_stock(stocks)
-	quantity = 0
-	for d in data:
-		quantity += d['productDetails/quantity']
-	return render(request,"stock-action.html",{'product_details':data,'action':actions[action],'quantity':quantity,'table':True})
+	return render(request,"stock-action.html",{'product_details':data,'action':actions[action],'table':True})
 
 
 @login_required(login_url='login')

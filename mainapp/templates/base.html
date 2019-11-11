@@ -189,14 +189,6 @@
         } );
     } ).draw();
 
-             stock_action.on( 'search.dt', function () {
-
-     let sum = stock_action.column( 4,{ search: 'applied' } ).data().sum();
-
-    $('#total_quantity').html(`quantité totale: ${sum}`)
-
-} );
-
 
 
     var products =  $('#products').DataTable({responsive: true, "columnDefs": [ {
