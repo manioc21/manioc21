@@ -60,7 +60,7 @@
                             <td><a href="{% url 'single-pest' pest|get_item:'_id' %}">{{pest|get_item:'_id'}}</a></td>
                             <td>{{pest.coop}}</td>
                              <td><a href="{% url 'single-farmer' pest|get_id_from_cmid %}">{{pest|get_name_from_cmid}}</a></td>
-                             <td>{{pest.fieldID|get_pest_field}}</td>
+                             <td> <a href="{% url 'single-field' pest|get_pest_field_id %}">{{pest.fieldID|get_pest_field}}</a></td>
                             <td>
                                 <table style="table-layout: fixed" width="100%" >
 

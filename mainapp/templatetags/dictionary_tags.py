@@ -1,5 +1,5 @@
 from django.template.defaulttags import register
-from mainapp.models import Farmer
+from mainapp.models import Farmer,Field
 
 @register.filter
 def get_item(dictionary, key):
@@ -46,9 +46,16 @@ def get_id_from_enid(farmer):
 
 
 @register.filter
-def get_pest_field(field):
-	field = field.split('-')
+def get_pest_field(pest):
+	field = pest.split('-')
 	return field[0]
+
+@register.filter
+def get_pest_field_id(pest):
+	f = Field.objects.filter(data__fieldID=pest['fieldID'])
+	if f.exists():
+		return f.last().data['_id']
+	return 0
 
 @register.filter
 def get_field_registrar(field):
