@@ -117,4 +117,25 @@
   } catch (error) {
     console.log(error);
   }
+
+
+  $('#delete').on('click',function(){
+    const user_id = $(this).data('id');
+
+    swal({
+  title: "Êtes-vous sûr?",
+  text: "Supprimer l'utilisateur",
+  icon: "warning",
+  buttons: ["Annuler", "Oui"],
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    window.location.href = `/user-accounts/?id=${user_id}`;
+  } 
+});
+    
+  })
+
+
 })(jQuery);

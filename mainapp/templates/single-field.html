@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h2 class="m-b-5">détails des champs</h2>
+                <h2 class="m-b-5"> Detail du champ</h2>
 
                 <div class="table-data__tool float-right">
                                
@@ -44,12 +44,12 @@
 
                         <tr class="tr-shadow">
                             <td>date de plantation</td>
-                            <td>{{field.data.plantingdate}}</td>
+                            <td>{{field.data|get_item:'schedule/plantingDate'}}</td>
                         </tr>
 
                         <tr class="tr-shadow">
                             <td>date de récolte</td>
-                            <td>{{field.data.harvestdate}}</td>
+                            <td>{{field.data|get_item:'schedule/harvestDate'}}</td>
                         </tr>
 
                         <tr class="tr-shadow">

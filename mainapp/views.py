@@ -326,7 +326,7 @@ def change_password(request):
 			user.save()
 			logout(request)
 			return redirect('login')
-		error = 'Passwords dont match'
+		error = 'Les mots de passe ne correspondent pas'
 		return render(request,"change-password.html",{'error':error})
 	return render(request,"change-password.html")
 
@@ -344,7 +344,7 @@ def create_account(request):
 		phone = request.POST.get('phone')
 		username = request.POST.get('username')
 		if User.objects.filter(username=username).exists():
-			error = 'Username exists, try another one'
+			error = "Le nom d'utilisateur existe, essayez-en un autre"
 			return render(request,"create-account.html",{'error':error})
 		if pass_2 == pass_1:
 			user = User.objects.create_user(username=username,password=pass_1,coop=coop)

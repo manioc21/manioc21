@@ -17,16 +17,12 @@ def get_fields():
 	fields = res.json()
 	for field in fields:
 		try:
-			field['harvestdate'] = field['schedule/harvestDate']
-			field['plantingdate'] = field['schedule/plantingDate']
-			field['geolocation'] = get_geopoint(field['trace'])
+			field['geolocation'] = get_geopoint(field.get('trace'))
 			field['manager'] = field['ownershipDetails/manager']
 			field['owner'] = field['ownershipDetails/owner']
 			field['ownershipType'] = field['ownershipDetails/ownershipType']
 			field['variety'] = field['varietyDetails/variety']
 		except KeyError:
-			field['harvestdate'] = field.get('schedule/harvestDate')
-			field['plantingdate'] = field.get('schedule/plantingDate')
 			field['geolocation'] = get_geopoint(field.get('trace'))
 			field['manager'] = field.get('fieldDetails/manager')
 			field['owner'] = field.get('fieldDetails/owner')

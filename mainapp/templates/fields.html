@@ -79,9 +79,9 @@ propriétaire</th>
                                             <td>{{forloop.counter}}</td>
                                             <td><a href="{% url 'single-field' field.data|get_item:'_id' %}">{{field.data.fieldName}}</a></td>
                                             <td><a href="{% url 'single-farmer' field|get_field_owner_id %}">{{field|get_field_owner}}</a></td>
-                                            <td>{{field.data.plantingdate}}</td>
-                                            <td>{{field.data.harvestdate}}</td>
-                                             <td {% if field.status == 'ready' %} class="text-success" {% elif field.status == 'harvest' %} class="text-warning" {% endif %}>{{field.get_status_display}}</td>
+                                            <td>{{field.data|get_item:'schedule/plantingDate'}}</td>
+                                            <td>{{field.data|get_item:'schedule/harvestDate'}}</td>
+                                             <td {% if field.status == 'ready' %} class="text-success font-weight-bold" {% elif field.status == 'harvest' %} class="text-warning" {% endif %}>{{field.get_status_display}}</td>
 
                                             <td>{{field.data.owner}}</td>
                                             <td>{{field.data.coop}}</td>
