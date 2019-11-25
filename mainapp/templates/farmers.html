@@ -34,7 +34,7 @@
                                     <thead>
                                         <tr bgcolor="green">
                                             <th class="text-white">N°</th>
-                                            <th class="text-white">ID</th>
+                                            <th class="text-white">CMID</th>
                                             <th class="text-white">Prenoms</th>
                                             <th class="text-white">Nom</th>
                                             <th class="text-white">Année de naissance</th>
@@ -57,7 +57,7 @@
                                         {% for farmer in farmers %}
                                         <tr class="tr-shadow">
                                             <td>{{forloop.counter}}</td>
-                                            <td>{{farmer|get_item:'CMID_seqNr'}}</td>
+                                            <td>{{farmer.CMID}}</td>
                                             <td><a href="{% url 'single-farmer' farmer|get_item:'_id' %}">{{farmer|get_item:'details/firstName'}} </a></td>
                                             <td><a href="{% url 'single-farmer' farmer|get_item:'_id' %}"> {{farmer|get_item:'details/surName'}}</a></td>
                                             <td>{{farmer|get_item:'details/birthYear'}}</td>
