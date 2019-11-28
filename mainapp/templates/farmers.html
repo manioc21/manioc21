@@ -41,7 +41,7 @@
                                             <th class="text-white">genre</th>
                                            
                                             <th class="text-white">telephone</th>
-                                            <th class="text-white">Superficie</th>
+                                            <th class="text-white">Superficie (ha)</th>
                                             <th class="text-white">Proportion d’appartenance</th>
                                             <th class="text-white">village</th>
                                             <th class="text-white">role</th>
@@ -57,7 +57,7 @@
                                         {% for farmer in farmers %}
                                         <tr class="tr-shadow">
                                             <td>{{forloop.counter}}</td>
-                                            <td>{{farmer.CMID}}</td>
+                                            <td>{{farmer.CMID|get_cmid}}</td>
                                             <td><a href="{% url 'single-farmer' farmer|get_item:'_id' %}">{{farmer|get_item:'details/firstName'}} </a></td>
                                             <td><a href="{% url 'single-farmer' farmer|get_item:'_id' %}"> {{farmer|get_item:'details/surName'}}</a></td>
                                             <td>{{farmer|get_item:'details/birthYear'}}</td>
@@ -66,7 +66,7 @@
                                             <td>{{farmer|get_item:'details/phoneNr'}}</td>
                                             <td>
                                             {% if farmer|get_item:'farm/farmSize' %}
-                                            {{farmer|get_item:'farm/farmSize'}} {{farmer|get_item:'farm/areaUnitsFarm'}}
+                                            {{farmer|get_farmsize:'farm/farmSize'}} 
                                             {% else %}
                                                 0
                                             {% endif %}

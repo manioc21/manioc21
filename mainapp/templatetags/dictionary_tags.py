@@ -158,3 +158,14 @@ def get_suppliers(supply):
 		else:
 			details.append({'name':s.get('supplyDetails/details/firstName'),'surname':s.get('supplyDetails/details/surName'),'phone':s.get('supplyDetails/details/phoneNr')})
 	return details
+
+@register.filter
+def get_cmid(cmid):
+	return cmid[6:]
+
+@register.filter
+def get_farmsize(dictionary, key):
+    size = dictionary.get(key)
+    if size:
+    	return int(size)
+    return 0
