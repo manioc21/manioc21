@@ -38,12 +38,18 @@
 
   <a class="navbar-brand" href="/">
     <img src="{% static 'mainapp/images/icon/logo4.png' %}" class="d-inline-block align-top" alt="">
+
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse header__navbar" id="navbarNav">
     <ul class="navbar-nav">
+         <li class="nav-item">
+                            <a  href="/">
+                                
+                                Accueil</a>
+                        </li>
        <li class="nav-item">
                             <a  href="{% url 'farmers' %}">
                                 <i class="fas fa-users"></i>
@@ -64,7 +70,7 @@
                          <li class="nav-item">
                             <a  href="{% url 'stock' %}">
                                 <i class="fas fa-warehouse"></i>
-                                Le stock</a>
+                                Les stocks</a>
                         </li>
                         <li class="nav-item">
                             <a  href="{% url 'transformed-products' %}">
