@@ -123,7 +123,7 @@ def roundoff_location(value):
 
 @register.filter
 def calculate_yield(value):
-	return round(value*20,2)
+	return round(value*25,2)
 
 @register.filter
 def calculate_weight(product):
