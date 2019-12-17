@@ -137,5 +137,14 @@
     
   })
 
+  $('#change_status').change(function(){
+    const status = $(this).val();
+
+    if (status != ""){
+      window.location.href = `?status=${status}`;
+    }
+
+  });
+
 
 })(jQuery);

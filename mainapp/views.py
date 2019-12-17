@@ -114,6 +114,9 @@ def get_field_points(trace):
 def single_field(request,id):
 	field = get_object_or_404(Field,data___id=id)
 	points = get_field_points(field.data['trace'])
+	if request.GET.get('status'):
+		field.status = request.GET.get('status')
+		field.save()
 	return render(request,"single-field.html",{'field':field,'points':points})
 
 

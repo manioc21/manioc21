@@ -24,7 +24,7 @@
                         <tbody>
 
                         <tr class="tr-shadow">
-                            <td >Nom</td>
+                            <td class="text-capitalize" >Nom</td>
 
                             <td>{{field.data.fieldName}}</td>
                         </tr>
@@ -32,30 +32,47 @@
                       
 
                         <tr class="tr-shadow">
-                            <td>le membre</td>
+                            <td class="text-capitalize">le membre</td>
                             <td><a href="{% url 'single-farmer' field|get_field_owner_id %}">{{field|get_field_owner}}</a></td>
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>emplacement</td>
+                            <td class="text-capitalize">emplacement</td>
                             <td><a href="#mapModal" data-toggle="modal">Carte de champ</a></td>
                         </tr>
 
 
                         <tr class="tr-shadow">
-                            <td>date de plantation</td>
+                            <td class="text-capitalize">date de plantation</td>
                             <td>{{field.data|get_item:'schedule/plantingDate'}}</td>
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>date de récolte</td>
+                            <td class="text-capitalize">date de récolte</td>
                             <td>{{field.data|get_item:'schedule/harvestDate'}}</td>
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>statut</td>
+                            <td class="text-capitalize">statut</td>
                             <td {% if field.status == 'ready' %} class="text-success"{% endif %}>
-                                {{field.get_status_display}}
+                                {{field.get_status_display}}     
+                                   
+                            </td>
+                        </tr>
+                         <tr class="tr-shadow">
+                            <td class="text-capitalize">changer le statut</td>
+                            <td>
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select id="change_status" class="js-select2" name="property">
+                                            <option value="" selected="selected">---</option>
+                                            
+                                            <option value="ready">Champs matures</option>
+                                            <option value="not_ready">Champs non matures
+</option>
+                                            <option value="harvest">Deja recolte</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
                             </td>
                         </tr>
 
@@ -67,13 +84,13 @@
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>propriétaire</td>
+                            <td class="text-capitalize">propriétaire</td>
                             <td>
                                 {{field.data.owner}}
                             </td>
                         </tr>
                         <tr class="tr-shadow">
-                            <td>type de propriété</td>
+                            <td class="text-capitalize">type de propriété</td>
                             <td>
                                 {{field.data.ownershipType}}
                             </td>
@@ -87,7 +104,7 @@
                        
 
                          <tr class="tr-shadow">
-                            <td>Variete de manioc</td>
+                            <td class="text-capitalize">Variete de manioc</td>
                             <td>{% if field.data.variety %}
                                                 {{field.data.variety}}
                                             {% elif field.data.variety_other %}
@@ -108,24 +125,24 @@
                         </tr>
 
                          <tr class="tr-shadow">
-                            <td>taille</td>
+                            <td class="text-capitalize">taille</td>
                             <td>{{field.data.area_ha|roundoff}} ha</td>
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>Production estimee</td>
+                            <td class="text-capitalize">Production estimee</td>
                             <td>{{field.data.area_ha|roundoff|calculate_yield}} t</td>
                         </tr>
 
                        
 
                          <tr class="tr-shadow">
-                            <td>Date d’enregistrement</td>
+                            <td class="text-capitalize">Date d’enregistrement</td>
                             <td>{{field.data.today}}</td>
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>Enregistre par</td>
+                            <td class="text-capitalize">Enregistre par</td>
                             <td><a href="{% url 'single-farmer' field|get_field_registrar_id %}">{{field|get_field_registrar}}</a></td>
                         </tr>
                        
