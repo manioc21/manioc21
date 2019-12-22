@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6c46443d-d496-4124-ab42-97dac80a45e3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainapp/management/commands/update_all.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainapp/management/commands/update_all.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainapp/static/mainapp/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/mainapp/static/mainapp/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainapp/templates/farmers.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainapp/templates/farmers.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainapp/templates/single-field.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainapp/templates/single-field.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainapp/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="6c46443d-d496-4124-ab42-97dac80a45e3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
