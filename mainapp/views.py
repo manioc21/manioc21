@@ -75,9 +75,12 @@ def farmers_map(request):
 
 @login_required(login_url='login')
 def single_farmer(request,id):
-	farmer = get_object_or_404(Farmer,data___id=id).data
-	images = get_images(farmer)
-	return render(request,"single-farmer.html",{'farmer':farmer,'images':images})
+	farmer = get_object_or_404(Farmer,data___id=id)
+	images = get_images(farmer.data)
+	if request.GET.get('status'):
+		farmer.status = request.GET.get('status')
+		farmer.save()
+	return render(request,"single-farmer.html",{'farmer':farmer.data,'status':farmer.get_status_display(),'images':images})
 
 
 @login_required(login_url='login')
@@ -296,7 +299,7 @@ def transformed_products(request):
 		products = products.filter(data__coop=request.user.coop)
 	total_weight = 0
 	for product in products:
-		total_weight += product['totalWeight_raw']
+		total_weight += product.get('totalWeight_raw',0)
 	return render(request,"transformed_products.html",{'products':products,'table':True,'total_weight':total_weight})
 
 

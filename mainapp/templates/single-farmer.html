@@ -58,6 +58,31 @@
                             <td>{{farmer|get_item:'details/surName'}} </td>
                         </tr>
 
+
+                        <tr class="tr-shadow">
+                            <td class="text-capitalize">statut</td>
+                            <td {% if status == 'Active' %} class="text-success"{% endif %}>
+                                {{status}}     
+                            </td>
+                        </tr>
+
+                         <tr class="tr-shadow">
+                            <td class="text-capitalize">changer le statut</td>
+                            <td>
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select id="change_status" class="js-select2" name="property">
+                                            <option value="" selected="selected">---</option>
+                                            
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive
+</option>
+                                            <option value="dead">Morte</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                            </td>
+                        </tr>
+
                         <tr class="tr-shadow">
                             <td>Annee de naissance</td>
                             <td>{{farmer|get_item:'details/birthYear'}}</td>

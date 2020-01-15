@@ -127,7 +127,7 @@ def calculate_yield(value):
 
 @register.filter
 def calculate_weight(product):
-	return product['productDetails/quantity'] * product['productDetails/weight']
+	return product.get('productDetails/quantity',0) * product.get('productDetails/weight',0)
 
 @register.filter
 def get_landowner(number):
