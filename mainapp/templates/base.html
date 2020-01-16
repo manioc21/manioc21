@@ -154,6 +154,7 @@
 <!-- Main JS-->
 <script src="{% static 'mainapp/js/main.js' %}"></script>
 <script type="text/javascript"  src="{% static 'mainapp/js/jquery.dataTables.js' %}"></script>
+<script type="text/javascript"  src="{% static 'mainapp/js/dataTables.fixedHeader.min.js' %}"></script>
 <script type="text/javascript"  src="{% static 'mainapp/js/ellipsis.js' %}"></script>
 <script type="text/javascript"  src="{% static 'mainapp/js/sum().js' %}"></script>
 
@@ -267,7 +268,8 @@
 } );
 
 
-        var farmer =  $('#farmers').DataTable({responsive: true, columnDefs: [ {
+        var farmer =  $('#farmers').DataTable({responsive: true, 
+            columnDefs: [ {
       targets: [7,8],
       render: $.fn.dataTable.render.ellipsis( 16 )
     } ,{

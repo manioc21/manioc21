@@ -14640,8 +14640,3 @@ section {
     padding-left: 30px;
 }
 
-.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
-  overflow-x: scroll !important;
-}
-
-

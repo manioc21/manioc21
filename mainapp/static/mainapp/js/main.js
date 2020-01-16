@@ -146,5 +146,17 @@
 
   });
 
+  $('.farmer_area').each(function(){
+
+      let text = $(this).text();
+
+      if (text.includes('m2'))
+      {
+        let new_text = text.replace('m2','');
+        $(this).html(new_text/10000 + ' ha');
+      }
+  });
+
+
 
 })(jQuery);
