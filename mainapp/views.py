@@ -14,10 +14,10 @@ import json
 def signin(request):
 	error = None
 	if request.method == 'POST':
-		username = request.POST.get('username').lower()
+		username = request.POST.get('username').upper()
 		password = request.POST.get('password')
-		if username != 'admin':
-			username = username.upper()
+		if username == 'ADMIN':
+			username = username.lower()
 		user = authenticate(username=username, password=password)
 		if user:
 			login(request,user)

@@ -14640,3 +14640,6 @@ section {
     padding-left: 30px;
 }
 
+th {
+    text-transform: capitalize;
+}

@@ -33,15 +33,15 @@
                             <th class="text-white">Coop</th>
                            
                             <th class="text-white">poids de manioc</th>
-                            <th class="text-white">détails des Produits transformes
-                                 <table style="table-layout: fixed" width="100%">
+                            <th width="100%" class="text-white">détails des Produits transformes
+                                 <table style="table-layout: fixed; " width="100%">
                                  <thead>
                                     <tr>
-                                        <th scope="col">Produits transformes</th>
-                                        <th scope="col">Unite</th>
-                                        <th scope="col">poids</th>
-                                        <th scope="col">Quantite</th>
-                                        <th scope="col">Poids total</th>
+                                        <th >Produits transformes</th>
+                                        <th >Unite</th>
+                                        <th >poids</th>
+                                        <th >Quantite</th>
+                                        <th >Poids total</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -60,8 +60,8 @@
                             <td><a href="{% url 'single-product' product|get_item:'_id' %}">{{product|get_item:'_id'}}</a></td>
                             <td>{{product.coop}}</td>
                             <td>{{product.totalWeight_raw}} kg</td>
-                            <td>
-                                <table style="table-layout: fixed" width="100%" >
+                            <td width="100%">
+                                <table style="table-layout: fixed;" width="100%" >
                                    
                                     {% for details in product.productDetails %}
                                     <tr>

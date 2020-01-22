@@ -40,9 +40,9 @@
                             <th class="text-white">ID</th>
                             <th class="text-white">Action</th>
                             <th class="text-white">Coop</th>
-                            <th class="text-white">détails des Produits
+                            <th width="100%" class="text-white">détails des Produits
                                  <table style="table-layout: fixed" width="100%" >
-                                    <thead>
+                                    <thead >
                                     <tr>
                                         <th >Produits</th>
                                         <th >Unite</th>
@@ -67,7 +67,7 @@
                             <td><a href="{% url 'single-stock' stock|get_item:'_id' %}">{{stock|get_item:'_id'}}</a></td>
                             <td><a>{{stock.action}}</td>
                             <td>{{stock.coop}}</td>
-                            <td>
+                            <td width="100%">
                                 <table style="table-layout: fixed" width="100%">
                                    
                                   

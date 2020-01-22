@@ -31,16 +31,16 @@
                             <th class="text-white">Coop</th>
                             <th class="text-white">Nom de membre</th>
                             <th class="text-white">Nom de champs</th>
-                            <th class="text-white">détails de Maladies et ravageurs
-                                 <table style="table-layout: fixed ;" width="100%" >
+                            <th width="100%" class="text-white">détails de Maladies et ravageurs
+                                 <table style="table-layout: fixed ;" width="100%"  >
                                  <thead>
                                     <tr>
 
-                                        <th scope="col">maladie</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Score</th>
-                                        <th scope="col">Racine</th>
-                                        <th scope="col">Feuilles</th>
+                                        <th >maladie</th>
+                                        <th >Date</th>
+                                        <th >Score</th>
+                                        <th >Racine</th>
+                                        <th >Feuilles</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -61,7 +61,7 @@
                             <td>{{pest.coop}}</td>
                              <td><a href="{% url 'single-farmer' pest|get_id_from_cmid %}">{{pest|get_name_from_cmid}}</a></td>
                              <td> <a href="{% url 'single-field' pest|get_pest_field_id %}">{{pest.fieldID|get_pest_field}}</a></td>
-                            <td>
+                            <td width="100%">
                                 <table style="table-layout: fixed" width="100%" >
 
                                     {% for details in pest.PD %}
