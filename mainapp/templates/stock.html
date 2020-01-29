@@ -73,16 +73,16 @@
                                   
                                     {% for details in stock.productDetails %}
                                     <tr>
-                                        <td>{{details|get_item:'productDetails/product'}}</td>
-                                        <td>{% if details|get_item:'productDetails/productUnit' %}
+                                        <td class="cell">{{details|get_item:'productDetails/product'}}</td>
+                                        <td class="cell">{% if details|get_item:'productDetails/productUnit' %}
                                                 {{details|get_item:'productDetails/productUnit'}}
 
                                             {% else %}
                                                 {{details|get_item:'productDetails/unit'}}
                                             {% endif %}
                                         </td>
-                                        <td>{{details|get_item:'productDetails/weight'}} kg</td>
-                                        <td>{{details|get_item:'productDetails/quantity'}}</td>
+                                        <td class="cell">{{details|get_item:'productDetails/weight'}} kg</td>
+                                        <td class="cell">{{details|get_item:'productDetails/quantity'}}</td>
                                         
                                     </tr>
                                     {% endfor %}

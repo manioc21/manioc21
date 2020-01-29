@@ -65,11 +65,11 @@
                                    
                                     {% for details in product.productDetails %}
                                     <tr>
-                                        <td>{{details|get_item:'productDetails/product'}}</td>
-                                        <td>{{details|get_item:'productDetails/unit'}}</td>
-                                        <td>{{details|get_item:'productDetails/weight'}}</td>
-                                        <td>{{details|get_item:'productDetails/quantity'}}</td>
-                                        <td>{{details|calculate_weight}} kg</td>
+                                        <td class="cell">{{details|get_item:'productDetails/product'}}</td>
+                                        <td class="cell">{{details|get_item:'productDetails/unit'}}</td>
+                                        <td class="cell">{{details|get_item:'productDetails/weight'}}</td>
+                                        <td class="cell">{{details|get_item:'productDetails/quantity'}}</td>
+                                        <td class="cell">{{details|calculate_weight}} kg</td>
                                     </tr>
                                     {% endfor %}
 

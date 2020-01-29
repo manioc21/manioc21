@@ -85,9 +85,9 @@
                                 <table style="table-layout:fixed" width="100%">
                                     {% for details in supply|get_suppliers %}
                                     <tr>
-                                        <td>{{details.name}}</td>
-                                        <td>{{details.surname}}</td>
-                                        <td>{{details.phone}}</td>
+                                        <td class="cell">{{details.name}}</td>
+                                        <td class="cell">{{details.surname}}</td>
+                                        <td class="cell">{{details.phone}}</td>
                                     </tr>
                                     {% endfor %}
                                 </table>

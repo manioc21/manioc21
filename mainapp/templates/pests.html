@@ -67,12 +67,12 @@
                                     {% for details in pest.PD %}
                                     <tr>
 
-                                        <td>{{details|get_item:'PD/pestDisease'}}</td>
-                                        <td>{{details|get_item:'PD/dateAppearance'}}</td>
+                                        <td class="cell">{{details|get_item:'PD/pestDisease'}}</td>
+                                        <td class="cell">{{details|get_item:'PD/dateAppearance'}}</td>
 
-                                        <td>{{details|get_item:'PD/score/score_incidence'}}</td>
-                                        <td>{{details|get_item:'PD/score/score_severity_roots'}}</td>
-                                        <td>{{details|get_item:'PD/score/score_severity_leaves'}}</td>
+                                        <td class="cell">{{details|get_item:'PD/score/score_incidence'}}</td>
+                                        <td class="cell">{{details|get_item:'PD/score/score_severity_roots'}}</td>
+                                        <td class="cell">{{details|get_item:'PD/score/score_severity_leaves'}}</td>
 
                                     </tr>
                                     {% endfor %}

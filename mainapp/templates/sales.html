@@ -73,11 +73,11 @@
                                    
                                     {% for details in sale.salesDetails %}
                                     <tr >
-                                         <td >{{details|get_item:'salesDetails/product'}}</td>
-                                        <td >{{details|get_item:'salesDetails/unit'}}</td>
-                                        <td >{{details|get_item:'salesDetails/weight'}} kg</td>
-                                        <td >{{details|get_item:'salesDetails/productDetails/quantity'}}</td>
-                                        <td >{{details|get_item:'salesDetails/productDetails/unitPrice'}}</td>
+                                         <td class="cell">{{details|get_item:'salesDetails/product'}}</td>
+                                        <td class="cell" >{{details|get_item:'salesDetails/unit'}}</td>
+                                        <td class="cell">{{details|get_item:'salesDetails/weight'}} kg</td>
+                                        <td class="cell">{{details|get_item:'salesDetails/productDetails/quantity'}}</td>
+                                        <td class="cell">{{details|get_item:'salesDetails/productDetails/unitPrice'}}</td>
                                        
                                     </tr>
                                     {% endfor %}
