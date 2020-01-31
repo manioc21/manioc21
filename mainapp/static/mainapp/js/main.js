@@ -146,6 +146,15 @@
 
   });
 
+  $('#farmer_status').change(function(){
+    const status = $(this).val();
+
+    if (status != ""){
+      window.location.href = `?status=${status}`;
+    }
+
+  });
+
   $('.farmer_area').each(function(){
 
       let text = $(this).text();
@@ -153,7 +162,14 @@
       if (text.includes('m2'))
       {
         let new_text = text.replace('m2','');
-        $(this).html(new_text/10000 + ' ha');
+        let num = new_text/10000;
+        $(this).html(num.toFixed(2) + ' ha');
+      }
+      else if (text.includes('are'))
+      {
+        let new_text = text.replace('are','');
+        let num = new_text/100;
+        $(this).html(num.toFixed(2) + ' ha');
       }
   });
 

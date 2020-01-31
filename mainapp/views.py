@@ -61,10 +61,13 @@ def farmers(request):
 	farmers = Farmer.objects.values_list('data',flat=True)
 	if request.user.is_admin == False:
 		farmers = farmers.filter(data__coop=request.user.coop)
+	status = request.GET.get('status')
+	if status:
+		farmers = farmers.filter(status=status)
 	size = 0
 	for farmer in farmers:
 		size += farmer.get('farm/farmSize',0)
-	return render(request,"farmers.html",{'farmers':farmers,'total_size':size,'table':True})
+	return render(request,"farmers.html",{'farmers':farmers,'total_size':round(size,2),'status':status,'table':True})
 
 
 @login_required(login_url='login')

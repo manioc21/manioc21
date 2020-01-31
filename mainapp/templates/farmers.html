@@ -21,6 +21,17 @@
                                         publier</button>
                     </div>
 
+                      <div class="rs-select2--light rs-select2--md">{% if status %} {{status}} {% endif %}
+                                        <select id="farmer_status" class="js-select2" name="property">
+                                            <option selected="selected">filtre</option>
+                                            <option value="">tous</option>
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                            <option value="dead">Morte</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+
                      <h4 id="total_size">
                             Superficie total: {{total_size}} ha
                         </h4>

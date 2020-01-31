@@ -31,16 +31,16 @@
                             <th class="text-white">Coop</th>
                             <th class="text-white">Nom de membre</th>
                             <th class="text-white">Nom de champs</th>
-                            <th width="100%" class="text-white">détails de Maladies et ravageurs
-                                 <table style="table-layout: fixed ;" width="100%"  >
+                            <th  class="text-white">détails de Maladies et ravageurs
+                                 <table class="table"  >
                                  <thead>
-                                    <tr>
+                                    <tr bgcolor="green">
 
-                                        <th >maladie</th>
-                                        <th >Date</th>
-                                        <th >Score</th>
-                                        <th >Racine</th>
-                                        <th >Feuilles</th>
+                                        <th class="cell" >maladie</th>
+                                        <th class="cell" >Date</th>
+                                        <th class="cell">Score</th>
+                                        <th class="cell">Racine</th>
+                                        <th class="cell">Feuilles</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -61,8 +61,8 @@
                             <td>{{pest.coop}}</td>
                              <td><a href="{% url 'single-farmer' pest|get_id_from_cmid %}">{{pest|get_name_from_cmid}}</a></td>
                              <td> <a href="{% url 'single-field' pest|get_pest_field_id %}">{{pest.fieldID|get_pest_field}}</a></td>
-                            <td width="100%">
-                                <table style="table-layout: fixed" width="100%" >
+                            <td >
+                                <table class="table" >
 
                                     {% for details in pest.PD %}
                                     <tr>

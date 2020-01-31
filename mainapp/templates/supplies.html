@@ -46,12 +46,12 @@
                             <th class="text-white">poids total</th>
                             <th class="text-white">Valeur totale</th>
                             <th width="100%" class="text-white">détails de l'offre
-                                <table style="table-layout: fixed">
+                                <table class="table">
                                      <thead>
-                                    <tr>
-                                        <th >Nom&nbsp;&nbsp;&nbsp;</th>
-                                        <th >Prenoms</th>
-                                        <th >Numero de telephone</th>
+                                    <tr bgcolor="green">
+                                        <th class="cell">Nom&nbsp;&nbsp;&nbsp;</th>
+                                        <th class="cell">Prenoms</th>
+                                        <th class="cell">Numero de telephone</th>
 
                                     </tr>
                                     </thead>
@@ -82,7 +82,7 @@
                             <td>{{supply|get_item:"totalDelivery/totalWeight"}}</td>
                             <td>{{supply|get_item:"totalDelivery/totalValue"}}</td>
                             <td width="100%">
-                                <table style="table-layout:fixed" width="100%">
+                                <table class="table">
                                     {% for details in supply|get_suppliers %}
                                     <tr>
                                         <td class="cell">{{details.name}}</td>

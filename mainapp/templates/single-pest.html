@@ -83,10 +83,10 @@
             <div class="col-md-12">
 
                 <div class="table-responsive">
-                      <table class="table table-striped common"  >
+                      <table class="table table-striped"  >
                                      <thead>
                                     <tr >
-                                        <th></th>
+                                        
                                         <th scope="col">Solution</th>
                                         <th scope="col">Disease</th>
                                         <th scope="col">Date</th>
@@ -101,7 +101,7 @@
                                     <tbody>
                                     {% for details in pest.PD %}
                                     <tr >
-                                        <td> {{forloop.counter}}</td>
+                                        
                                        <td>{{details|get_item:'PD/solutionFr'}}</td>
                                         <td>{{details|get_item:'PD/pestDisease'}}</td>
                                         <td>{{details|get_item:'PD/dateAppearance'}}</td>

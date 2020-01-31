@@ -36,15 +36,15 @@
                             <th class="text-white">Numero de telephone
                             </th>
                            
-                            <th width="100%" class="text-white">détails des ventes
-                                 <table style="table-layout: fixed" width="100%">
+                            <th class="text-white">détails des ventes
+                                 <table class="table">
                                     <thead>
-                                    <tr>
-                                        <th >Produits</th>
-                                        <th >Unite</th>
-                                        <th >poids</th>
-                                        <th >Quantite</th>
-                                        <th >Prix ​​unitaire</th>
+                                    <tr bgcolor="green">
+                                        <th class="cell" >Produits</th>
+                                        <th class="cell">Unite</th>
+                                        <th class="cell">poids</th>
+                                        <th class="cell">Quantite</th>
+                                        <th class="cell">Prix ​​unitaire</th>
                                        
                                     </tr>
                                     </thead>
@@ -68,8 +68,8 @@
                             <td>{{sale|get_item:'details/customer_firstName'}} {{sale|get_item:'details/customer_surName'}}</td>
                             <td>{{sale|get_item:"details/customer_phoneNumber"}}</td>
                            
-                            <td width="100%">
-                                <table style="table-layout: fixed" width="100%" >
+                            <td >
+                                <table class="table" >
                                    
                                     {% for details in sale.salesDetails %}
                                     <tr >

@@ -40,14 +40,14 @@
                             <th class="text-white">ID</th>
                             <th class="text-white">Action</th>
                             <th class="text-white">Coop</th>
-                            <th width="100%" class="text-white">détails des Produits
-                                 <table style="table-layout: fixed" width="100%" >
+                            <th  class="text-white">détails des Produits
+                                 <table class="table" >
                                     <thead >
-                                    <tr>
-                                        <th >Produits</th>
-                                        <th >Unite</th>
-                                        <th >poids</th>
-                                        <th >Quantite</th>
+                                    <tr bgcolor="green">
+                                        <th class="cell">Produits</th>
+                                        <th class="cell">Unite</th>
+                                        <th class="cell">poids</th>
+                                        <th class="cell">Quantite</th>
                                     </tr>
                                     </thead>
                                 </table>
@@ -67,8 +67,8 @@
                             <td><a href="{% url 'single-stock' stock|get_item:'_id' %}">{{stock|get_item:'_id'}}</a></td>
                             <td><a>{{stock.action}}</td>
                             <td>{{stock.coop}}</td>
-                            <td width="100%">
-                                <table style="table-layout: fixed" width="100%">
+                            <td >
+                                <table class="table">
                                    
                                   
                                     {% for details in stock.productDetails %}

@@ -14644,8 +14644,9 @@ th {
     text-transform: capitalize;
 }
 .cell {
-    max-width: 0;
+    min-width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
 }
