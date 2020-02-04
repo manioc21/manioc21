@@ -12,7 +12,7 @@ class Command(BaseCommand):
         	field.status = 'ready'
         	field.save()
         max_date = today - datetime.timedelta(days=60)
-        fields = Field.objects.filter(data__harvestdate__gte=str(max_date))
+        fields = Field.objects.filter(data__harvestdate=str(max_date))
         for field in fields:
         	field.status = 'harvest'
         	field.history = True
