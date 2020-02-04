@@ -1,0 +1,115 @@
+{% extends 'history/base.html' %}
+{% block content %}
+<!-- STATISTIC-->
+<section class="statistic statistic2">
+    <div class="container">
+       
+        <div class="row">
+            
+                <a href="{% url 'history-farmers' %}" class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--blue">
+                    <h2 class="number">{{farmers_total}}</h2>
+                    <span class="desc">Les membres</span>
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </a>
+            
+                <a href="/fields/?status=not_ready" class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--red">
+                    <h2 class="number">{{not_ready_fields}}</h2>
+                    <span class="desc">Champs non matures</span>
+                    <div class="icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                </div>
+            </a>
+                <a href="/fields/?status=ready" class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--green">
+                    <h2 class="number">{{ready_fields}}</h2>
+                    <span class="desc">Champs matures</span>
+                    <div class="icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                </div>
+            </a>
+                <a href="/fields/?status=harvest" class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--orange">
+                    <h2 class="number">{{harvest_fields}}</h2>
+                    <span class="desc">Champs recoltes</span>
+                    <div class="icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+</section>
+<!-- END STATISTIC-->
+<!--maps-->
+<section class="p-t-20" id="fields">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-4">Carte des champs
+                </h3>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-md-12">
+                <p><img src="https://maps.google.com/mapfiles/ms/icons/red-dot.png">Champs non matures</p>
+                <p><img src="https://maps.google.com/mapfiles/ms/icons/green-dot.png">Champs matures</p>
+                <p><img src="https://maps.google.com/mapfiles/ms/icons/orange-dot.png">Champs deja recoltes</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div style="height: 400px;width: 100%;" id="fields_map"></div>
+            </div>
+        </div>
+    </div>
+   
+</section>
+<!--end maps -->
+
+
+<script>
+// Initialize and add the map
+function initMap() {
+    // The locations
+    const cameroon = { lat: 7.3696, lng: 12.3446 };
+    const congo = { lat: 3.6606, lng: 14.8966 }
+
+
+    const fields_map = new google.maps.Map(
+        document.getElementById('fields_map'), { zoom: 4, center: cameroon });
+
+
+
+    // The field markers
+    let markers1 = [
+        {% for field in fields %}
+              new google.maps.Marker({ position:  { lat: {{field.data.geolocation.0}}, lng: {{field.data.geolocation.1}} }, map: fields_map, icon: { url:{% if field.status == 'ready' %}"https://maps.google.com/mapfiles/ms/icons/green-dot.png"{% elif field.status == 'harvest' %}
+              "https://maps.google.com/mapfiles/ms/icons/orange-dot.png" {% else %}"https://maps.google.com/mapfiles/ms/icons/red-dot.png"{% endif %} ,scaledSize: new google.maps.Size(18, 18)} })
+    .addListener('click', function(e) {
+       new google.maps.InfoWindow({
+          content: "nom de champs: {{field.data.fieldName}}<br>propriétaire: {{field.data.coop}}<br> Area_ha: {{field.data.area_ha|roundoff}} ha <br> date de plantation: {{field.data|get_item:'schedule/plantingDate'}} <br> date de récolte: {{field.data|get_item:'schedule/harvestDate'}} "
+        }).open(fields_map, this);
+    }) ,
+    {% endfor %}
+    ]
+
+   
+  
+}
+
+</script>
+
+
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc2v8qMx-9ghIjw0MikfoiSgfak3WKHHA&callback=initMap">
+</script>
+{% endblock %}

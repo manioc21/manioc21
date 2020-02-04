@@ -1,0 +1,110 @@
+{% extends 'history/base.html'  %}
+
+
+{% block content %}
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="m-b-5">Livraisons de racine</h2>
+
+
+                 <div class="table-data__tool">
+
+                    <div class="table-data__tool-right">
+                     <button onclick="window.print()" class="btn btn-secondary">
+                                        publier</button>
+                    </div>
+                    <h4 id="total_weight">
+                            Poids total: {{total_weight}} kg
+                        </h4>
+                    <h4 id="total_value">
+                            Valeur totale: {{total_value}} XAF
+                        </h4>
+                     <a href="{% url 'history-supply-map' %}" class="btn btn-success">Localisation des points de livraison</a>
+                      
+                </div>
+
+                <div class="table-responsive ">
+                    <table class="table table-bordered" id="supply" >
+                        <thead>
+                        <tr bgcolor="green">
+                            <th class="text-white">N°</th>
+                            <th class="text-white">Supply ID</th>
+                            <th class="text-white">Coop</th>
+                            <th class="text-white">Origine</th>
+                          
+                            <th class="text-white">Numero de telephone</th>
+                           
+                            <th class="text-white">Village</th>
+                            <th class="text-white">mode de paiement</th>
+                            <th class="text-white">Prix ​​unitaire</th>
+                            <th class="text-white">unité de poids</th>
+                            <th class="text-white">quantité</th>
+                            <th class="text-white">poids total</th>
+                            <th class="text-white">Valeur totale</th>
+                            <th width="100%" class="text-white">détails de l'offre
+                                <table class="table">
+                                     <thead>
+                                    <tr bgcolor="green">
+                                        <th class="cell">Nom&nbsp;&nbsp;&nbsp;</th>
+                                        <th class="cell">Prenoms</th>
+                                        <th class="cell">Numero de telephone</th>
+
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </th>
+                             <th class="text-white">Enregistre le
+                            </th>
+                            <th class="text-white">Enregistre par
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for supply in supplies %}
+                        <tr >
+                            <td>{{forloop.counter}}</td>
+                            <td><a href="{% url 'history-single-supply' supply|get_item:'_id' %}">{{supply|get_item:'_id'}}</a></td>
+                            <td>{{supply.coop}}</td>
+                            <td>{{supply.origin}}</td>
+                           
+                            <td>{{supply|get_item:"ENID_confirm_details/ENID_confirm_phoneNr"}}</td>
+                            
+                            <td>{{supply.village}}</td>
+                            <td>{{supply|get_item:"totalDelivery/paymentMode"|edit_role}}</td>
+                            <td>{{supply|get_item:"localUnitDetails/localUnitPrice"}}</td>
+                            <td>{{supply|get_item:"localUnitDetails/localUnitWeight"}}</td>
+                            <td>{{supply|get_item:"localUnitDetails/localUnitQuantity"}}</td>
+                            <td>{{supply|get_item:"totalDelivery/totalWeight"}}</td>
+                            <td>{{supply|get_item:"totalDelivery/totalValue"}}</td>
+                            <td width="100%">
+                                <table class="table">
+                                    {% for details in supply|get_suppliers %}
+                                    <tr>
+                                        <td class="cell">{{details.name}}</td>
+                                        <td class="cell">{{details.surname}}</td>
+                                        <td class="cell">{{details.phone}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </td>
+                            <td>{{supply.today}}</td>
+                            <td><a href="{% url 'history-single-farmer' supply|get_id_from_enid %}">{{supply|get_name_from_enid}}</a></td>
+                        </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END DATA TABLE-->
+
+{% endblock %}

@@ -1,0 +1,47 @@
+
+{% extends 'history/base.html'  %}   
+
+
+{% block content %}
+
+            <!-- DATA TABLE-->
+            <section class="p-t-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="m-b-5">Payement</h2>
+                              
+                            
+                            <div class="table-responsive ">
+                                <table class="table table-data2" id="payments">
+                                    <thead>
+                                        <tr >     
+                                            <th >Nom</th>
+                                            <th >Numero de telephone</th>
+                                            <th >montant</th>
+                                            <th >Date</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for payment in payments %}
+                                        <tr class="tr-shadow">
+                                            <td>{{payment.farmer.data|get_item:'details/firstName'}} {{payment.farmer.data|get_item:'details/surName'}}</td>
+                                            <td>{{payment.farmer.data|get_item:'details/phoneNr'}}</td>
+                                            <td>{{payment.amount}}</td>
+                                            <td>{{payment.date}}</td>
+                                            
+                                          
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END DATA TABLE-->
+
+{% endblock %}

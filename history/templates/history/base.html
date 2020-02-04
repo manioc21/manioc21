@@ -12,7 +12,7 @@
     <meta name="description" content="Moniac 21">
     <meta name="author" content="Daniel kakai">
     <!-- Title Page-->
-    <title>IITA Manioc 21</title>
+    <title>IITA Manioc 21 Histoire</title>
     <!-- Fontfaces CSS-->
     <link href="{% static 'mainapp/css/font-face.css' %}" rel="stylesheet" media="all">
     <link href="{% static 'mainapp/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
@@ -53,44 +53,44 @@
                                 Accueil</a>
                         </li>
        <li class="nav-item">
-                            <a  href="{% url 'farmers' %}">
+                            <a  href="{% url 'history-farmers' %}">
                                 <i class="fas fa-users"></i>
                                 Les membres</a>
                         </li>
                         <li class="nav-item" >
-                            <a  href="{% url 'fields' %}">
+                            <a  href="{% url 'history-fields' %}">
                                 <i class="fas fa-map"></i>
                                 Les champs</a>
                         </li>
 
                         <li class="nav-item">
-                            <a  href="{% url 'sales' %}">
+                            <a  href="{% url 'history-sales' %}">
                                 <i class="fas fa-shopping-bag"></i>
                                 Les ventes</a>
                         </li>
 
                          <li class="nav-item">
-                            <a  href="{% url 'stock' %}">
+                            <a  href="{% url 'history-stock' %}">
                                 <i class="fas fa-warehouse"></i>
                                 Les stocks</a>
                         </li>
                         <li class="nav-item">
-                            <a  href="{% url 'transformed-products' %}">
+                            <a  href="{% url 'history-transformed-products' %}">
                                 <i class="fas fa-lemon"></i>
                                 Produits transformes</a>
                         </li>
                         <li class="nav-item">
-                            <a  href="{% url 'supplies' %}">
+                            <a  href="{% url 'history-supplies' %}">
                                 <i class="fas fa-truck"></i>
                                 Livraisons de racine</a>
                         </li>
                         <li class="nav-item">
-                            <a  href="{% url 'pests' %}">
+                            <a  href="{% url 'history-pests' %}">
                                 <i class="fas fa-bug"></i>
                                 Maladies et ravageurs</a>
                         </li>
                         <li class="nav-item">
-                            <a  href="{% url 'payments' %}">
+                            <a  href="{% url 'history-payments' %}">
                                 <i class="fas fa-money-bill-alt"></i>
                                 Payement </a>
                         </li>
@@ -123,6 +123,11 @@
     
     <!-- PAGE CONTENT-->
     <div class="page-content--bgf7">
+         <div class="row justify-content-center">
+           
+            <h2 >Histoire</h2>
+            
+        </div>
 
 
         {% block content %}

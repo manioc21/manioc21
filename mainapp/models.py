@@ -25,36 +25,44 @@ class Farmer(models.Model):
     coop = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     data = JSONField(null=True,blank=True)
     status = models.CharField(max_length=50,default='active',choices=FARMER_STATUS)
+    history = models.BooleanField(default=False)
 
 class Field(models.Model):
     coop = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     data = JSONField()
     status = models.CharField(max_length=50,default='not_ready',choices=FIELD_STATUS)
+    history = models.BooleanField(default=False)
 
 class Payment(models.Model):
     farmer = models.ForeignKey(Farmer,on_delete=models.CASCADE)
     amount = models.FloatField()
     date = models.DateTimeField(auto_now=True)
+    history = models.BooleanField(default=False)
 
 class Stock(models.Model):
     coop = models.ForeignKey(User, on_delete=models.CASCADE)
     data = JSONField()
+    history = models.BooleanField(default=False)
 
 class Sales(models.Model):
     coop = models.ForeignKey(User, on_delete=models.CASCADE)
     data = JSONField()
+    history = models.BooleanField(default=False)
 
 class Supply(models.Model):
     coop = models.ForeignKey(User, on_delete=models.CASCADE)
     data = JSONField()
+    history = models.BooleanField(default=False)
 
 class TransformedProduct(models.Model):
     coop = models.ForeignKey(User, on_delete=models.CASCADE)
     data = JSONField()
+    history = models.BooleanField(default=False)
 
 class Pest(models.Model):
     coop = models.ForeignKey(User, on_delete=models.CASCADE)
     data = JSONField()
+    history = models.BooleanField(default=False)
 
 class Message(models.Model):
     body = models.TextField()

@@ -1,0 +1,171 @@
+{% extends 'history/base.html'  %}
+
+
+{% block content %}
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="m-b-5">détails des ventes</h2>
+
+                <div class="table-data__tool float-right">
+                               
+                                <div class="table-data__tool-right">
+                                    <button onclick="window.print()" class="btn btn-secondary">
+                                        publier</button>
+                                </div>
+                            </div>
+
+                <div class="table-responsive ">
+                    <table class="table table-bordered" >
+
+                        <tbody>
+
+                        <tr class="tr-shadow">
+                            <td >ID</td>
+                            <td>{{sale|get_item:'_id'}}</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>les membres</td>
+                            <td>{{sale|get_item:'details/customer_firstName'}} {{sale|get_item:'details/customer_surName'}}</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>la localisation</td>
+                            <td><a href="#mapModal" data-toggle="modal">sale location</a></td>
+                        </tr>
+
+
+                        <tr class="tr-shadow">
+                            <td>Numero de telephone</td>
+                            <td>{{sale|get_item:"details/customer_phoneNumber"}}</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>email</td>
+                            <td>{{sale|get_item:"details/customer_email"}}</td>
+                        </tr>
+
+                         <tr class="tr-shadow">
+                            <td>Date d’enregistrement</td>
+                            <td>{{sale.today}}</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>Enregistre par</td>
+                            <td><a href="{% url 'history-single-farmer' sale|get_id_from_enid %}">{{sale|get_name_from_enid}}</a></td>
+                        </tr>
+
+                         <tr class="tr-shadow">
+                            <td>prix total</td>
+                            <td>{{sale.totalPrice}} XAF</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<hr/>
+     <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+
+                <div class="table-responsive">
+                      <table class="table table-striped"  >
+                                     <thead>
+                                    <tr >
+                                        <th></th>
+                                        <th >Produits</th>
+                                        <th >Unite</th>
+                                        <th >poids</th>
+                                        <th >Quantite</th>
+                                        <th >Prix ​​unitaire</th>
+                                        <th >Étiquette de prix</th>
+                                        
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for details in sale.salesDetails %}
+                                    <tr >
+                                        <td> {{forloop.counter}}</td>
+                                        <td >{{details|get_item:'salesDetails/product'}}</td>
+                                        <td >{{details|get_item:'salesDetails/unit'}}</td>
+                                        <td >{{details|get_item:'salesDetails/weight'}} kg</td>
+                                        <td >{{details|get_item:'salesDetails/productDetails/quantity'}}</td>
+                                        <td >{{details|get_item:'salesDetails/productDetails/unitPrice'}}</td>
+                                        <td >{{details|get_item:'salesDetails/productDetails/productPriceLabel'}}</td>
+                                      
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Maps</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <div class="container">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div style="height: 400px;width: 100%;" id="sales_map"></div>
+            </div>
+        </div>
+    </div>
+   </div>
+</div>
+</div>
+</div>
+
+<!--end maps -->
+
+
+<script>
+// Initialize and add the map
+function initMap() {
+    // The locations
+
+     const sales_map = new google.maps.Map(
+        document.getElementById('sales_map'), { zoom: 10, center: { lat: {{sale|get_item:'_geolocation'|get_lat}}, lng: {{sale|get_item:'_geolocation'|get_lng}} } });
+
+
+
+    // The field markers
+    let markers = [
+        
+              new google.maps.Marker({ position:  { lat: {{sale|get_item:'_geolocation'|get_lat}}, lng: {{sale|get_item:'_geolocation'|get_lng}} }, map: sales_map, icon: { url: "http://maps.google.com/mapfiles/kml/pal4/icon49.png" } })
+    
+    ]
+  
+}
+
+</script>
+
+
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc2v8qMx-9ghIjw0MikfoiSgfak3WKHHA&callback=initMap">
+</script>
+    
+
+{% endblock %}

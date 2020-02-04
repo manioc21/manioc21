@@ -1,0 +1,61 @@
+{% extends 'history/base.html' %}
+{% block content %}
+
+
+<!--maps-->
+<section class="p-t-20" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-4">carte des membres
+                </h3>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-md-12">
+                <p><img src="http://maps.google.com/mapfiles/kml/pal4/icon49.png">Les membres</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div style="height: 400px;width: 100%;" id="farmers_map"></div>
+            </div>
+        </div>
+    </div>
+   
+</section>
+<!--end maps -->
+<script>
+// Initialize and add the map
+function initMap() {
+    // The locations
+    const cameroon = { lat: 7.3696, lng: 12.3446 };
+    const congo = { lat: 3.6606, lng: 14.8966 }
+
+
+    const farmers_map = new google.maps.Map(
+        document.getElementById('farmers_map'), { zoom: 4, center: cameroon });
+
+
+    // The field markers
+    let markers2 = [
+        {% for farmer in farmers %}
+              new google.maps.Marker({ position:  { lat: {{farmer|get_item:'_geolocation'|get_lat}}, lng: {{farmer|get_item:'_geolocation'|get_lng}} }, map: farmers_map, icon: { url: "http://maps.google.com/mapfiles/kml/pal4/icon49.png",scaledSize: new google.maps.Size(18, 18) } })
+    .addListener('click', function(e) {
+       new google.maps.InfoWindow({
+          content: "Prenoms: {{farmer|get_item:'details/firstName'}}<br>Nom: {{farmer|get_item:'details/surName'}}<br>Village: {{farmer.village}}<br>Superficie du champ: {{farmer|get_item:'farm/farmSize'}} {{farmer|get_item:'farm/areaUnitsFarm'}}"
+        }).open(farmers_map, this);
+    }) ,
+    {% endfor %}
+    ]
+  
+}
+
+</script>
+
+
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc2v8qMx-9ghIjw0MikfoiSgfak3WKHHA&callback=initMap">
+</script>
+{% endblock %}

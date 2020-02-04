@@ -1,0 +1,74 @@
+{% extends 'history/base.html'  %}
+
+
+{% block content %}
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="m-b-5">Stock {{action}}</h2>
+
+
+                <div class="table-data__tool">
+
+                    <div class="table-data__tool-right">
+  <button onclick="window.print()" class="btn btn-secondary">
+                                        publier</button>
+                    </div>
+
+                   
+
+                      <div class="rs-select2--light rs-select2--md">
+                                        <select value="{{request.GET.action}}" id="action" class="js-select2" >
+                                            
+                                            <option >filtre</option>
+                                            <option value="all">All</option>
+                                            <option value="available">Disponible
+</option>
+                                            <option value="receive">Recevoir</option>
+                                            <option value="count">Compter</option>
+                                            <option value="withdraw">Retirer</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                  
+                </div>
+                
+                <div class="table-responsive ">
+                    <table class="table table-striped" id="stock_action" >
+                                     <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                         <th >Produits</th>
+                                        <th >Unite</th>
+                                        <th >poids</th>
+                                        <th >Quantite</th>
+                                       
+
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for details in product_details %}
+                                    <tr>
+                                        <td> {{forloop.counter}}</td>
+                                        <td>{{details|get_item:'productDetails/product'}}</td>
+                                        <td>{{details|get_item:'productDetails/unit'}}</td>
+                                        <td>{{details|get_item:'productDetails/weight'}} kg</td>
+                                        <td>{{details|get_item:'productDetails/quantity'}}</td>
+                                        
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END DATA TABLE-->
+
+{% endblock %}

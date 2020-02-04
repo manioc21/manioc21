@@ -1,0 +1,179 @@
+{% extends 'history/base.html'  %}
+
+
+{% block content %}
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="m-b-5">détails des Maladies et ravageurs</h2>
+
+                <div class="table-data__tool float-right">
+                               
+                                <div class="table-data__tool-right">
+                                    <button onclick="window.print()" class="btn btn-secondary">
+                                        publier</button>
+                                </div>
+                            </div>
+
+                <div class="table-responsive ">
+                    <table class="table table-bordered" >
+
+                        <tbody>
+
+                        <tr class="tr-shadow">
+                            <td >ID</td>
+                            <td>{{pest|get_item:'_id'}}</td>
+                        </tr>
+
+                         <tr class="tr-shadow">
+                            <td>pièces jointes</td>
+                            <td>
+                                {% for image in images %}
+                                     <img src="https://api.ona.io/{{image}}" width="200px" height="200px">
+                                {% endfor %}
+                            </td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>les membres</td>
+                            <td><a href="{% url 'history-single-farmer' pest|get_id_from_cmid %}">{{pest|get_name_from_cmid}}</a></td>
+                        </tr>
+
+                         <tr class="tr-shadow">
+                            <td>Les champs</td>
+                           <td>{{pest.fieldID|get_pest_field}}</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>la localisation</td>
+                            <td><a href="#mapModal" data-toggle="modal">pest location</a></td>
+                        </tr>
+
+
+                        <tr class="tr-shadow">
+                            <td>COOP</td>
+                            <td>{{pest.coop}}</td>
+                        </tr>
+
+
+
+                         <tr class="tr-shadow">
+                            <td>Date d’enregistrement</td>
+                            <td>{{pest.today}}</td>
+                        </tr>
+
+                        <tr class="tr-shadow">
+                            <td>Enregistre par</td>
+                            <td><a href="{% url 'history-single-farmer' pest|get_pest_registrar_id %}">{{pest|get_pest_registrar}}</a></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<hr/>
+     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="table-responsive">
+                      <table class="table table-striped"  >
+                                     <thead>
+                                    <tr >
+                                        
+                                        <th scope="col">Solution</th>
+                                        <th scope="col">Disease</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Label</th>
+                                        <th scope="col">Score</th>
+                                        <th scope="col">Roots</th>
+                                        <th scope="col">Leaves</th>
+                                        
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for details in pest.PD %}
+                                    <tr >
+                                        
+                                       <td>{{details|get_item:'PD/solutionFr'}}</td>
+                                        <td>{{details|get_item:'PD/pestDisease'}}</td>
+                                        <td>{{details|get_item:'PD/dateAppearance'}}</td>
+                                        <td>{{details|get_item:'PD/pestDiseaseLabel'}}</td>
+                                        <td>{{details|get_item:'PD/score/score_incidence'}}</td>
+                                        <td>{{details|get_item:'PD/score/score_severity_roots'}}</td>
+                                        <td>{{details|get_item:'PD/score/score_severity_leaves'}}</td>
+                                      
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Maps</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <div class="container">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div style="height: 400px;width: 100%;" id="pests_map"></div>
+            </div>
+        </div>
+    </div>
+   </div>
+</div>
+</div>
+</div>
+
+<!--end maps -->
+
+
+<script>
+// Initialize and add the map
+function initMap() {
+    // The locations
+
+     const pests_map = new google.maps.Map(
+        document.getElementById('pests_map'), { zoom: 10, center: { lat: {{pest.geolocation.0}}, lng: {{pest.geolocation.1}} } });
+
+
+
+    // The field markers
+    let markers = [
+        
+              new google.maps.Marker({ position:  { lat: {{pest.geolocation.0}}, lng: {{pest.geolocation.1}} }, map: pests_map, icon: { url: "http://maps.google.com/mapfiles/kml/pal4/icon49.png" } })
+    
+    ]
+  
+}
+
+</script>
+
+
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBc2v8qMx-9ghIjw0MikfoiSgfak3WKHHA&callback=initMap">
+</script>
+    
+
+{% endblock %}

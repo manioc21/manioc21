@@ -33,8 +33,8 @@ def signout(request):
 
 @login_required(login_url='login')
 def index(request):
-	farmers = Farmer.objects.values_list('data',flat=True)
-	fields = Field.objects.all()
+	farmers = Farmer.objects.filter(history=False).values_list('data',flat=True)
+	fields = Field.objects.filter(history=False).all()
 	if request.user.is_admin == False:
 		farmers = farmers.filter(data__coop=request.user.coop)
 		fields = fields.filter(data__coop=request.user.coop)
@@ -58,7 +58,7 @@ def get_images(obj):
 
 @login_required(login_url='login')
 def farmers(request):
-	farmers = Farmer.objects.values_list('data',flat=True)
+	farmers = Farmer.objects.filter(history=False).values_list('data',flat=True)
 	if request.user.is_admin == False:
 		farmers = farmers.filter(data__coop=request.user.coop)
 	status = request.GET.get('status')
@@ -72,7 +72,7 @@ def farmers(request):
 
 @login_required(login_url='login')
 def farmers_map(request):
-	farmers = Farmer.objects.values_list('data',flat=True)
+	farmers = Farmer.objects.filter(history=False).values_list('data',flat=True)
 	if request.user.is_admin == False:
 		farmers = farmers.filter(data__coop=request.user.coop)
 	return render(request,"farmers-map.html",{'farmers':farmers})
@@ -80,7 +80,7 @@ def farmers_map(request):
 
 @login_required(login_url='login')
 def single_farmer(request,id):
-	farmer = get_object_or_404(Farmer,data___id=id)
+	farmer = get_object_or_404(Farmer,data___id=id,history=False)
 	images = get_images(farmer.data)
 	if request.GET.get('status'):
 		farmer.status = request.GET.get('status')
@@ -90,7 +90,7 @@ def single_farmer(request,id):
 
 @login_required(login_url='login')
 def fields(request):
-	fields = Field.objects.all()
+	fields = Field.objects.filter(history=False).all()
 	if request.user.is_admin == False:
 		fields = fields.filter(data__coop=request.user.coop)
 	status = request.GET.get('status')
@@ -101,7 +101,7 @@ def fields(request):
 
 @login_required(login_url='login')
 def fields_map(request):
-	fields = Field.objects.all()
+	fields = Field.objects.filter(history=False).all()
 	if request.user.is_admin == False:
 		fields = fields.filter(data__coop=request.user.coop)
 	return render(request,"fields-map.html",{'fields':fields})
@@ -120,7 +120,7 @@ def get_field_points(trace):
 
 @login_required(login_url='login')
 def single_field(request,id):
-	field = get_object_or_404(Field,data___id=id)
+	field = get_object_or_404(Field,data___id=id,history=False)
 	points = get_field_points(field.data['trace'])
 	if request.GET.get('status'):
 		field.status = request.GET.get('status')
@@ -130,7 +130,7 @@ def single_field(request,id):
 
 @login_required(login_url='login')
 def stock(request):
-	stocks = Stock.objects.values_list('data', flat=True)
+	stocks = Stock.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		stocks = stocks.filter(data__coop=request.user.coop)
 	action = request.GET.get('action')
@@ -141,7 +141,7 @@ def stock(request):
 
 @login_required(login_url='login')
 def single_stock(request,id):
-	stock = get_object_or_404(Stock,data___id=id).data
+	stock = get_object_or_404(Stock,data___id=id,history=False).data
 	return render(request,"single-stock.html",{'stock':stock,'table':True})
 
 
@@ -164,10 +164,10 @@ def format_stock(stocks):
 
 
 def available_stock(coop):
-	count = Stock.objects.filter(data__action='count',data__coop=coop).order_by('data__end').values_list('data', flat=True).last()
+	count = Stock.objects.filter(data__action='count',data__coop=coop,history=False).order_by('data__end').values_list('data', flat=True).last()
 	date = count['end']
-	received = Stock.objects.filter(data__action='receive',data__end__gt=date,data__coop=coop).values_list('data', flat=True)
-	withdraw = Stock.objects.filter(data__action='withdraw',data__end__gt=date,data__coop=coop).values_list('data', flat=True)
+	received = Stock.objects.filter(data__action='receive',data__end__gt=date,data__coop=coop,history=False).values_list('data', flat=True)
+	withdraw = Stock.objects.filter(data__action='withdraw',data__end__gt=date,data__coop=coop,history=False).values_list('data', flat=True)
 	#import pdb;pdb.set_trace()
 	for item in withdraw:
 		for data in item['productDetails']:
@@ -177,10 +177,10 @@ def available_stock(coop):
 
 
 def available_stock_all():
-	count = Stock.objects.filter(data__action='count').order_by('data__end').values_list('data', flat=True).last()
+	count = Stock.objects.filter(data__action='count',history=False).order_by('data__end').values_list('data', flat=True).last()
 	date = count['end']
-	received = Stock.objects.filter(data__action='receive',data__end__gt=date).values_list('data', flat=True)
-	withdraw = Stock.objects.filter(data__action='withdraw',data__end__gt=date).values_list('data', flat=True)
+	received = Stock.objects.filter(data__action='receive',data__end__gt=date,history=False).values_list('data', flat=True)
+	withdraw = Stock.objects.filter(data__action='withdraw',data__end__gt=date,history=False).values_list('data', flat=True)
 	#import pdb;pdb.set_trace()
 	for item in withdraw:
 		for data in item['productDetails']:
@@ -201,7 +201,7 @@ def stock_action(request,action):
 	elif action == "all":
 		return redirect('stock')
 	else:
-		stocks = Stock.objects.filter(data__action=action).values_list('data', flat=True)
+		stocks = Stock.objects.filter(data__action=action,history=False).values_list('data', flat=True)
 		if request.user.is_admin == False:
 			stocks = stocks.filter(data__coop=request.user.coop)
 		data = format_stock(stocks)
@@ -210,7 +210,7 @@ def stock_action(request,action):
 
 @login_required(login_url='login')
 def stock_map(request):
-	stocks = Stock.objects.values_list('data', flat=True)
+	stocks = Stock.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		stocks = stocks.filter(data__coop=request.user.coop)
 	return render(request,"stock-map.html",{'stocks':stocks})
@@ -218,7 +218,7 @@ def stock_map(request):
 
 @login_required(login_url='login')
 def pest(request):
-	pests = Pest.objects.values_list('data', flat=True)
+	pests = Pest.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		pests = pests.filter(data__coop=request.user.coop)
 	return render(request,"pests.html",{'pests':pests,'table':True})
@@ -226,7 +226,7 @@ def pest(request):
 
 @login_required(login_url='login')
 def single_pest(request,id):
-	pest = get_object_or_404(Pest,data___id=id).data
+	pest = get_object_or_404(Pest,data___id=id,history=False).data
 	images = get_images(pest)
 	pest['geolocation'] = Field.objects.get(data__fieldID=pest['fieldID']).data['geolocation']
 	return render(request,"single-pest.html",{'pest':pest,'images':images,'table':True})
@@ -234,7 +234,7 @@ def single_pest(request,id):
 
 @login_required(login_url='login')
 def pest_map(request):
-	pests = Pest.objects.values_list('data', flat=True)
+	pests = Pest.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		pests = pests.filter(data__coop=request.user.coop)
 	for pest in pests:
@@ -247,7 +247,7 @@ def pest_map(request):
 
 @login_required(login_url='login')
 def sales(request):
-	sales = Sales.objects.values_list('data', flat=True)
+	sales = Sales.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		sales = sales.filter(data__coop=request.user.coop)
 	total_price = 0
@@ -259,13 +259,13 @@ def sales(request):
 
 @login_required(login_url='login')
 def single_sale(request,id):
-	sale = get_object_or_404(Sales,data___id=id).data
+	sale = get_object_or_404(Sales,data___id=id,history=False).data
 	return render(request,"single-sale.html",{'sale':sale,'table':True})
 
 
 @login_required(login_url='login')
 def sales_map(request):
-	sales = Sales.objects.values_list('data', flat=True)
+	sales = Sales.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		sales = sales.filter(data__coop=request.user.coop)
 	return render(request,"sales-map.html",{'sales':sales})
@@ -273,7 +273,7 @@ def sales_map(request):
 
 @login_required(login_url='login')
 def supplies(request):
-	supplies = Supply.objects.values_list('data', flat=True)
+	supplies = Supply.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		supplies = supplies.filter(data__coop=request.user.coop)
 	total_value = 0
@@ -286,20 +286,20 @@ def supplies(request):
 
 @login_required(login_url='login')
 def supply_map(request):
-	supplies = Supply.objects.values_list('data', flat=True)
+	supplies = Supply.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		supplies = supplies.filter(data__coop=request.user.coop)
 	return render(request,"supply-map.html",{'supplies':supplies})
 
 @login_required(login_url='login')
 def single_supply(request,id):
-	supply = get_object_or_404(Supply,data___id=id).data
+	supply = get_object_or_404(Supply,data___id=id,history=False).data
 	return render(request,"single-supply.html",{'supply':supply,'table':True})
 
 
 @login_required(login_url='login')
 def transformed_products(request):
-	products = TransformedProduct.objects.values_list('data', flat=True)
+	products = TransformedProduct.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		products = products.filter(data__coop=request.user.coop)
 	total_weight = 0
@@ -310,19 +310,19 @@ def transformed_products(request):
 
 @login_required(login_url='login')
 def single_product(request,id):
-	product = get_object_or_404(TransformedProduct,data___id=id).data
+	product = get_object_or_404(TransformedProduct,data___id=id,history=False).data
 	return render(request,"single-product.html",{'product':product,'table':True})
 
 @login_required(login_url='login')
 def products_map(request):
-	products = TransformedProduct.objects.values_list('data', flat=True)
+	products = TransformedProduct.objects.filter(history=False).values_list('data', flat=True)
 	if request.user.is_admin == False:
 		products = products.filter(data__coop=request.user.coop)
 	return render(request,"products-map.html",{'products':products})
 
 
 def payments(request):
-	payments = Payment.objects.all().order_by('-id')
+	payments = Payment.objects.filter(history=False).all().order_by('-id')
 	return render(request,"payments.html",{'payments':payments,'table':True})\
 
 

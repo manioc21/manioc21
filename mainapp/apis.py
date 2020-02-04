@@ -22,12 +22,14 @@ def get_fields():
 			field['owner'] = field['ownershipDetails/owner']
 			field['ownershipType'] = field['ownershipDetails/ownershipType']
 			field['variety'] = field['varietyDetails/variety']
+			field['harvestdate'] = field.get('schedule/harvestDate',field.get('harvestdate'))
 		except KeyError:
 			field['geolocation'] = get_geopoint(field.get('trace'))
 			field['manager'] = field.get('fieldDetails/manager')
 			field['owner'] = field.get('fieldDetails/owner')
 			field['ownershipType'] = field.get('fieldDetails/ownershipType')
 			field['variety'] = field.get('varietyDetails/variety')
+			field['harvestdate'] = field.get('schedule/harvestDate',field.get('harvestdate'))
 	return fields
 
 def get_farmers():

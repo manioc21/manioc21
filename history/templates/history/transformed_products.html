@@ -1,0 +1,93 @@
+{% extends 'history/base.html'  %}
+
+
+{% block content %}
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="m-b-5">Produits transformes</h2>
+
+
+                <div class="table-data__tool">
+
+                    <div class="table-data__tool-right">
+                     <button onclick="window.print()" class="btn btn-secondary">
+                                        publier</button>
+                    </div>
+                    <h4 id="total_weight">
+                            poids de manioc: {{total_weight}} kg
+                        </h4>
+                     <a href="{% url 'history-products-map' %}" class="btn btn-success">Localisation des centres de transformation</a>
+                      
+                </div>
+
+                <div class="table-responsive ">
+                    <table class="table table-bordered" id="products" >
+                        <thead>
+                        <tr bgcolor="green">
+                             <th class="text-white">N°</th>
+                              <th class="text-white">Produit ID</th>
+                            <th class="text-white">Coop</th>
+                           
+                            <th class="text-white">poids de manioc</th>
+                            <th  class="text-white">détails des Produits transformes
+                                 <table class="table">
+                                 <thead>
+                                    <tr bgcolor="green">
+                                        <th class="cell">Produits transformes</th>
+                                        <th class="cell">Unite</th>
+                                        <th class="cell">poids</th>
+                                        <th class="cell">Quantite</th>
+                                        <th class="cell">Poids total</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </th>
+                             <th class="text-white">Enregistre le
+                            </th>
+                            <th class="text-white">Enregistre par
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for product in products %}
+                        <tr >
+                            <td>{{forloop.counter}}</td>
+                            <td><a href="{% url 'history-single-product' product|get_item:'_id' %}">{{product|get_item:'_id'}}</a></td>
+                            <td>{{product.coop}}</td>
+                            <td>{{product.totalWeight_raw}} kg</td>
+                            <td >
+                                <table class="table" >
+                                   
+                                    {% for details in product.productDetails %}
+                                    <tr bgcolor="green">
+                                        <td class="cell">{{details|get_item:'productDetails/product'}}</td>
+                                        <td class="cell">{{details|get_item:'productDetails/unit'}}</td>
+                                        <td class="cell">{{details|get_item:'productDetails/weight'}}</td>
+                                        <td class="cell">{{details|get_item:'productDetails/quantity'}}</td>
+                                        <td class="cell">{{details|calculate_weight}} kg</td>
+                                    </tr>
+                                    {% endfor %}
+
+                                </table>
+                            </td>
+                             <td>{{product.today}}</td>
+                           <td><a href="{% url 'history-single-farmer' product|get_id_from_enid %}">{{product|get_name_from_enid}}</a></td>
+                        </tr>
+                        {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END DATA TABLE-->
+
+{% endblock %}
