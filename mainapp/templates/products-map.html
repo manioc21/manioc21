@@ -44,7 +44,7 @@ function initMap() {
               new google.maps.Marker({ position:  { lat: {{product|get_item:'_geolocation'|get_lat}}, lng: {{product|get_item:'_geolocation'|get_lng}} }, map: products_map, icon: { url: "http://maps.google.com/mapfiles/kml/pal4/icon49.png",scaledSize: new google.maps.Size(18, 18) } })
     .addListener('click', function(e) {
        new google.maps.InfoWindow({
-          content: "Coop: {{product.coop}}<br>Poids total: {{product.totalWeight_raw}} kg<br>Produits transformes: {{product.products}} "
+          content: "Coop: {{product.coop}}<br>Poids des racines: {{product.totalWeight_raw}} kg<br>Produits transformes: {{product.products}} "
         }).open(products_map, this);
     }) ,
     {% endfor %}

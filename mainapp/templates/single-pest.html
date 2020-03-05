@@ -24,7 +24,7 @@
                         <tbody>
 
                         <tr class="tr-shadow">
-                            <td >ID</td>
+                            <td >N° enregistrement</td>
                             <td>{{pest|get_item:'_id'}}</td>
                         </tr>
 
@@ -44,13 +44,10 @@
 
                          <tr class="tr-shadow">
                             <td>Les champs</td>
-                           <td>{{pest.fieldID|get_pest_field}}</td>
+                           <td><a href="{% url 'single-field' pest|get_pest_field_id %}">{{pest.fieldID|get_pest_field}}</a></td>
                         </tr>
 
-                        <tr class="tr-shadow">
-                            <td>la localisation</td>
-                            <td><a href="#mapModal" data-toggle="modal">pest location</a></td>
-                        </tr>
+                      
 
 
                         <tr class="tr-shadow">
@@ -66,7 +63,7 @@
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>Enregistre par</td>
+                            <td>Enregistré par</td>
                             <td><a href="{% url 'single-farmer' pest|get_pest_registrar_id %}">{{pest|get_pest_registrar}}</a></td>
                         </tr>
 
@@ -88,12 +85,12 @@
                                     <tr >
                                         
                                         <th scope="col">Solution</th>
-                                        <th scope="col">Disease</th>
+                                        <th scope="col">Maladies et ravageurs</th>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Label</th>
+                                        <th scope="col">Designation</th>
                                         <th scope="col">Score</th>
-                                        <th scope="col">Roots</th>
-                                        <th scope="col">Leaves</th>
+                                        <th scope="col">Severité Racines</th>
+                                        <th scope="col">Severité Feuilles</th>
                                         
                                     </tr>
                                     </thead>

@@ -25,9 +25,9 @@
                                         <select id="farmer_status" class="js-select2" name="property">
                                             <option selected="selected">filtre</option>
                                             <option value="">tous</option>
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                            <option value="dead">Morte</option>
+                                            <option value="active">Actif</option>
+                                            <option value="inactive">Inactif</option>
+                                            <option value="dead">Mort</option>
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
@@ -45,22 +45,22 @@
                                     <thead>
                                         <tr bgcolor="green">
                                             <th class="text-white">N°</th>
-                                            <th class="text-white">CMID</th>
-                                            <th class="text-white">Prenoms</th>
+                                            <th class="text-white">N° ID </th>
+                                            <th class="text-white">Prénoms</th>
                                             <th class="text-white">Nom</th>
                                             <th class="text-white">Année de naissance</th>
                                             <th class="text-white">genre</th>
                                            
-                                            <th class="text-white">telephone</th>
-                                            <th class="text-white">Superficie</th>
+                                            <th class="text-white">téléphone</th>
+                                            <th class="text-white">Terres disponibles</th>
                                             <th class="text-white">Proportion d’appartenance</th>
                                             <th class="text-white">village</th>
-                                            <th class="text-white">role</th>
+                                            <th class="text-white">Fonction</th>
                                             <th class="text-white">Cooperative</th>
                                             <th class="text-white">association</th>
-                                            <th class="text-white">Annee d'adhesion</th>
-                                            <th class="text-white">Enregistre le</th>
-                                            <th class="text-white">Enregistre par</th>
+                                            <th class="text-white">Année d'adhesion</th>
+                                            <th class="text-white">Enregistré le</th>
+                                            <th class="text-white">Enregistré par</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,14 +79,14 @@
                                             {% if farmer|get_item:'farm/farmSize' %}
                                             {{farmer|get_farmsize:'farm/farmSize'}} {{farmer|get_item:'farm/areaUnitsFarm'}}
                                             {% else %}
-                                                0
+                                                0 ha
                                             {% endif %}
                                         </td>
                                             <td>{{farmer|get_item:'farm/landOwned'|get_landowner}}</td>
                                             <td>{{farmer.village}}</td>
                                             <td>{{farmer.role|edit_role}}</td>
                                             <td>{{farmer.coop}}</td>
-                                            <td>{% if farmer.assoc %} {{farmer.assoc}} {% else %} {{farmer.assoc_new}}  {% endif %}</td>
+                                            <td>{% if farmer.assoc_new %} {{farmer.assoc_new}} {% else %} {{farmer.assoc}}  {% endif %}</td>
                                             <td>{{farmer.coop_year}}</td>
                                             <td>{{farmer.today}}</td>
                                             <td><a href="{% url 'single-farmer' farmer|get_id_from_enid %}">{{farmer|get_name_from_enid}}</a></td>

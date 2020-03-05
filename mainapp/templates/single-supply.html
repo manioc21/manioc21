@@ -24,15 +24,15 @@
                         <tbody>
 
                         <tr class="tr-shadow">
-                            <td >ID</td>
+                            <td >N° enregistrement</td>
                             <td>{{supply|get_item:'_id'}}</td>
                         </tr>
 
 
 
                         <tr class="tr-shadow">
-                            <td>la localisation</td>
-                            <td><a href="#mapModal" data-toggle="modal">supply location</a></td>
+                            <td>localisation</td>
+                            <td><a href="#mapModal" data-toggle="modal">{{supply|get_item:'_geolocation'|roundoff_location}}</a></td>
                         </tr>
 
 
@@ -52,13 +52,13 @@
                         </tr>
 
                          <tr class="tr-shadow">
-                            <td>fournisseuse</td>
+                            <td>fournisseurs</td>
                             <td>
                                 <table>
                                     <thead>
                                         <th>nom</th>
                                         <th>prenoms</th>
-                                        <th>Numero de telephone</th>
+                                        <th>telephone</th>
                                     </thead>
                                     <tbody>
                                         {% for details in supply|get_suppliers %}
@@ -91,8 +91,8 @@
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>Unite de pesage</td>
-                            <td>{{supply|get_item:"localUnitDetails/localUnitWeight"}}</td>>
+                            <td>Poids unité </td>
+                            <td>{{supply|get_item:"localUnitDetails/localUnitWeight"}} kg</td>>
                         </tr>
 
                         <tr class="tr-shadow">
@@ -128,7 +128,7 @@
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>Enregistre par</td>
+                            <td>Enregistré par</td>
                             <td><a href="{% url 'single-farmer' supply|get_id_from_enid %}">{{supply|get_name_from_enid}}</a></td>
                         </tr>
 

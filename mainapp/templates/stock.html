@@ -23,13 +23,13 @@
                                             <option value="all">All</option>
                                             <option value="available">Disponible
 </option>
-                                            <option value="receive">Recevoir</option>
+                                            <option value="receive">Reçu</option>
                                             <option value="count">Compter</option>
-                                            <option value="withdraw">Retirer</option>
+                                            <option value="withdraw">Retiré</option>
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
-                     <a href="{% url 'stock-map' %}" class="btn btn-success">Localisation des centres de gestion des stocks</a>
+                     <a href="{% url 'stock-map' %}" class="btn btn-success">Carte des points de stockage</a>
                 </div>
                 
                 <div class="table-responsive ">
@@ -37,7 +37,7 @@
                         <thead>
                         <tr bgcolor="green">
                              <th class="text-white">N°</th>
-                            <th class="text-white">ID</th>
+                            <th class="text-white">N° enregistrement</th>
                             <th class="text-white">Action</th>
                             <th class="text-white">Coop</th>
                             <th  class="text-white">détails des Produits
@@ -45,17 +45,17 @@
                                     <thead >
                                     <tr bgcolor="green">
                                         <th class="cell">Produits</th>
-                                        <th class="cell">Unite</th>
+                                        <th class="cell">Unité</th>
                                         <th class="cell">poids</th>
-                                        <th class="cell">Quantite</th>
+                                        <th class="cell">Quantité</th>
                                     </tr>
                                     </thead>
                                 </table>
                             </th>
                                 
-                              <th class="text-white">Enregistre le
+                              <th class="text-white">Enregistré le
                             </th>
-                            <th class="text-white">Enregistre par
+                            <th class="text-white">Enregistré par
                             </th>
                         </tr>
                         </thead>
@@ -81,7 +81,14 @@
                                                 {{details|get_item:'productDetails/unit'}}
                                             {% endif %}
                                         </td>
-                                        <td class="cell">{{details|get_item:'productDetails/weight'}} kg</td>
+                                        <td class="cell">
+                                            {% if details|get_item:'productDetails/weight' %}
+                                        {{details|get_item:'productDetails/weight'}} kg
+                                        
+                                        {% else %}
+                                            Inconnu
+                                        {% endif %}
+                                    </td>
                                         <td class="cell">{{details|get_item:'productDetails/quantity'}}</td>
                                         
                                     </tr>

@@ -154,7 +154,7 @@ def format_stock(stocks):
 	for detail in details:
 		pr = detail['productDetails/product']
 		unit = detail.get('productDetails/unit',detail.get('productDetails/productUnit'))
-		weight = detail['productDetails/weight']
+		weight = detail.get('productDetails/weight',0)
 		total_q = 0
 		for detail in details:
 			if pr == detail['productDetails/product'] and unit == detail.get('productDetails/unit',detail.get('productDetails/productUnit')) and weight == detail['productDetails/weight']:

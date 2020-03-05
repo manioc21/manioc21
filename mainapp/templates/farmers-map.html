@@ -43,7 +43,7 @@ function initMap() {
               new google.maps.Marker({ position:  { lat: {{farmer|get_item:'_geolocation'|get_lat}}, lng: {{farmer|get_item:'_geolocation'|get_lng}} }, map: farmers_map, icon: { url: "http://maps.google.com/mapfiles/kml/pal4/icon49.png",scaledSize: new google.maps.Size(18, 18) } })
     .addListener('click', function(e) {
        new google.maps.InfoWindow({
-          content: "Prenoms: {{farmer|get_item:'details/firstName'}}<br>Nom: {{farmer|get_item:'details/surName'}}<br>Village: {{farmer.village}}<br>Superficie du champ: {{farmer|get_item:'farm/farmSize'}} {{farmer|get_item:'farm/areaUnitsFarm'}}"
+          content: "Prenoms: <a href='{% url 'single-farmer' farmer|get_item:'_id' %}'>{{farmer|get_item:'details/firstName'}} </a><br>Nom: {{farmer|get_item:'details/surName'}}<br>Village: {{farmer.village}}<br>Superficie du champ: {{farmer|get_item:'farm/farmSize'}} {{farmer|get_item:'farm/areaUnitsFarm'}}"
         }).open(farmers_map, this);
     }) ,
     {% endfor %}

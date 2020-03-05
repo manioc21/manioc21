@@ -11,9 +11,9 @@ FIELD_STATUS = (
 )
 
 FARMER_STATUS = (
-    ('active','Active'),
-    ('inactive','Inactive'),
-    ('dead','Morte')
+    ('active','Actif'),
+    ('inactive','Inactif'),
+    ('dead','Mort')
 )
 
 class Coop(models.Model):

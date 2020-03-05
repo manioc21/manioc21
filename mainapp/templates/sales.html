@@ -20,7 +20,7 @@
                     <h4 id="total_sales">
                             prix total: {{total_price}} XAF
                         </h4>
-                     <a href="{% url 'sales-map' %}" class="btn btn-success">Localisation des points de vente</a>
+                     <a href="{% url 'sales-map' %}" class="btn btn-success">Carte des points de vente</a>
                       
                 </div>
 
@@ -29,11 +29,11 @@
                         <thead>
                         <tr bgcolor="green">
                             <th class="text-white">N°</th>
-                            <th class="text-white">ID</th>
+                            <th class="text-white">N° de vente</th>
                             <th class="text-white">Coop</th>
-                            <th class="text-white">Nom
+                            <th class="text-white">Nom du client
                             </th>
-                            <th class="text-white">Numero de telephone
+                            <th class="text-white">telephone
                             </th>
                            
                             <th class="text-white">détails des ventes
@@ -41,9 +41,9 @@
                                     <thead>
                                     <tr bgcolor="green">
                                         <th class="cell" >Produits</th>
-                                        <th class="cell">Unite</th>
+                                        <th class="cell">Unité</th>
                                         <th class="cell">poids</th>
-                                        <th class="cell">Quantite</th>
+                                        <th class="cell">Quantité</th>
                                         <th class="cell">Prix ​​unitaire</th>
                                        
                                     </tr>
@@ -52,9 +52,9 @@
                             </th>
                             <th class="text-white">prix total
                             </th>
-                            <th class="text-white">Enregistre le
+                            <th class="text-white">Enregistré le
                             </th>
-                            <th class="text-white">Enregistre par
+                            <th class="text-white">Enregistré par
                             </th>
                         </tr>
                         </thead>
@@ -75,7 +75,14 @@
                                     <tr >
                                          <td class="cell">{{details|get_item:'salesDetails/product'}}</td>
                                         <td class="cell" >{{details|get_item:'salesDetails/unit'}}</td>
-                                        <td class="cell">{{details|get_item:'salesDetails/weight'}} kg</td>
+                                        <td class="cell">
+                                        {% if details|get_item:'productDetails/weight' %}
+                                        {{details|get_item:'productDetails/weight'}} kg
+                                        
+                                        {% else %}
+                                            Inconnu
+                                        {% endif %}
+                                    </td>
                                         <td class="cell">{{details|get_item:'salesDetails/productDetails/quantity'}}</td>
                                         <td class="cell">{{details|get_item:'salesDetails/productDetails/unitPrice'}}</td>
                                        

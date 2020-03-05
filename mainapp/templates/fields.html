@@ -55,21 +55,21 @@
                                     <thead>
                                         <tr bgcolor="green">
                                             <th class="text-white">N°</th>
-                                            <th class="text-white">nom de champs</th>
+                                            <th class="text-white">nom du champs</th>
                                             <th class="text-white">
 le membre</th>
                                             <th class="text-white">date de plantation</th>
                                             <th class="text-white">date de récolte</th>
                                             <th class="text-white">statut</th>
                                             <th class="text-white">propriétaire</th>
-                                            <th class="text-white">Cooperative</th>
-                                            <th class="text-white">le Manager</th>
-                                            <th class="text-white">Variete de manioc</th>
-                                            <th class="text-white">Source</th>
-                                            <th class="text-white">Taille</th>
-                                           <th class="text-white">Production estimee</th>
-                                            <th class="text-white">Enregistre le</th>
-                                            <th class="text-white">Enregistre par</th>
+                                            <th class="text-white">Coopérative</th>
+                                            <th class="text-white">Gestionnare</th>
+                                            <th class="text-white">Variete du manioc</th>
+                                            <th class="text-white">Source des boutures</th>
+                                            <th class="text-white">Superficie</th>
+                                           <th class="text-white">Production estimée</th>
+                                            <th class="text-white">Enregistré le</th>
+                                            <th class="text-white">Enregistré par</th>
 
                                         </tr>
                                     </thead>
@@ -105,10 +105,10 @@ le membre</th>
                                                 {{field.data.source}}
                                             {% endif %}
                                         </td>
-                                            <td>
+                                            <td class="text-center">
                                                 {{field.data.area_ha|roundoff}} ha
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 {{field.data.area_ha|roundoff|calculate_yield}} t
                                             </td>
                                            

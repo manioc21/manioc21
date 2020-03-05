@@ -48,7 +48,7 @@ function initMap() {
               "https://maps.google.com/mapfiles/ms/icons/orange-dot.png" {% else %}"https://maps.google.com/mapfiles/ms/icons/red-dot.png"{% endif %} ,scaledSize: new google.maps.Size(18, 18)} })
     .addListener('click', function(e) {
        new google.maps.InfoWindow({
-          content: "nom de champs: {{field.data.fieldName}}<br>propriétaire: {{field.data.coop}}<br> Area_ha: {{field.data.area_ha|roundoff}} ha <br> date de plantation: {{field.data|get_item:'schedule/plantingDate'}} <br> date de récolte: {{field.data|get_item:'schedule/harvestDate'}} "
+          content: "Nom du champs: <a href='{% url 'single-field' field.data|get_item:'_id' %}'>{{field.data.fieldName}}</a><br>Propriétaire: {{field|get_field_owner}}<br> Superficie: {{field.data.area_ha|roundoff}} ha <br> Date de plantation: {{field.data|get_item:'schedule/plantingDate'}} <br> Date de récolte: {{field.data|get_item:'schedule/harvestDate'}} "
         }).open(fields_map, this);
     }) ,
     {% endfor %}

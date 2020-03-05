@@ -23,7 +23,7 @@
                     <h4 id="total_value">
                             Valeur totale: {{total_value}} XAF
                         </h4>
-                     <a href="{% url 'supply-map' %}" class="btn btn-success">Localisation des points de livraison</a>
+                     <a href="{% url 'supply-map' %}" class="btn btn-success">Carte des points de livraison</a>
                       
                 </div>
 
@@ -32,34 +32,34 @@
                         <thead>
                         <tr bgcolor="green">
                             <th class="text-white">N°</th>
-                            <th class="text-white">Supply ID</th>
+                            <th class="text-white">N° enregistrement</th>
                             <th class="text-white">Coop</th>
                             <th class="text-white">Origine</th>
                           
-                            <th class="text-white">Numero de telephone</th>
+                            <th class="text-white">telephone</th>
                            
                             <th class="text-white">Village</th>
-                            <th class="text-white">mode de paiement</th>
+                            <th class="text-white">mode paiement</th>
                             <th class="text-white">Prix ​​unitaire</th>
-                            <th class="text-white">unité de poids</th>
+                            <th class="text-white">poids unité </th>
                             <th class="text-white">quantité</th>
                             <th class="text-white">poids total</th>
                             <th class="text-white">Valeur totale</th>
-                            <th width="100%" class="text-white">détails de l'offre
+                            <th width="100%" class="text-white">détails des livreurs
                                 <table class="table">
                                      <thead>
                                     <tr bgcolor="green">
                                         <th class="cell">Nom&nbsp;&nbsp;&nbsp;</th>
                                         <th class="cell">Prenoms</th>
-                                        <th class="cell">Numero de telephone</th>
+                                        <th class="cell">telephone</th>
 
                                     </tr>
                                     </thead>
                                 </table>
                             </th>
-                             <th class="text-white">Enregistre le
+                             <th class="text-white">Enregistré le
                             </th>
-                            <th class="text-white">Enregistre par
+                            <th class="text-white">Enregistré par
                             </th>
                         </tr>
                         </thead>
@@ -77,7 +77,7 @@
                             <td>{{supply.village}}</td>
                             <td>{{supply|get_item:"totalDelivery/paymentMode"|edit_role}}</td>
                             <td>{{supply|get_item:"localUnitDetails/localUnitPrice"}}</td>
-                            <td>{{supply|get_item:"localUnitDetails/localUnitWeight"}}</td>
+                            <td>{{supply|get_item:"localUnitDetails/localUnitWeight"}} kg</td>
                             <td>{{supply|get_item:"localUnitDetails/localUnitQuantity"}}</td>
                             <td>{{supply|get_item:"totalDelivery/totalWeight"}}</td>
                             <td>{{supply|get_item:"totalDelivery/totalValue"}}</td>

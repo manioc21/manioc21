@@ -44,7 +44,7 @@ function initMap() {
               new google.maps.Marker({ position:  { lat: {{supply|get_item:'_geolocation'|get_lat}}, lng: {{supply|get_item:'_geolocation'|get_lng}} }, map: supplys_map, icon: { url: "http://maps.google.com/mapfiles/kml/pal4/icon49.png",scaledSize: new google.maps.Size(18, 18) } })
     .addListener('click', function(e) {
        new google.maps.InfoWindow({
-          content: "Action: {{supply.action}}<br>Produits: {{supply.products}} "
+          content: "Name:{% for details in supply|get_suppliers %} {{details.name}} {{details.surname}} <br>{% endfor %}<br>Quantity: {{supply|get_item:'localUnitDetails/localUnitQuantity'}} <br>Price:{{supply|get_item:'localUnitDetails/localUnitPrice'}}"
         }).open(supplys_map, this);
     }) ,
     {% endfor %}

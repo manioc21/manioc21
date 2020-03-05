@@ -6,18 +6,6 @@ class Command(BaseCommand):
     help = 'Update pests'
 
     def handle(self, *args, **kwargs):
-        #fields
-        fields_local = Field.objects.all()
-        for field in fields_local:
-            field.history = True
-            field.save()
-        self.stdout.write("finished fields")
-        #farmers
-        fields_local = Farmer.objects.all()
-        for field in fields_local:
-            field.history = True
-            field.save()
-        self.stdout.write("finished farmers")
         #pests
         fields_local = Pest.objects.all()
         for field in fields_local:

@@ -37,8 +37,8 @@
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td class="text-capitalize">emplacement</td>
-                            <td><a href="#mapModal" data-toggle="modal">Carte de champ</a></td>
+                            <td class="text-capitalize">carte du champ</td>
+                            <td><a href="#mapModal" data-toggle="modal">{{field|get_item:'_geolocation'|roundoff_location}}</a></td>
                         </tr>
 
 
@@ -97,14 +97,14 @@
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>LE MANAGER</td>
+                            <td>Gestionnare</td>
                             <td>{{field.data.manager}}</td>
                         </tr>
 
                        
 
                          <tr class="tr-shadow">
-                            <td class="text-capitalize">Variete de manioc</td>
+                            <td class="text-capitalize">Variete du manioc</td>
                             <td>{% if field.data.variety %}
                                                 {{field.data.variety}}
                                             {% elif field.data.variety_other %}
@@ -116,7 +116,7 @@
                         </tr>
 
                          <tr class="tr-shadow">
-                            <td>SOURCE</td>
+                            <td>Source des boutures</td>
                             <td>{% if field.data.source_name %}
                                             {{field.data.source_name}}
                                             {% else %}
@@ -125,12 +125,12 @@
                         </tr>
 
                          <tr class="tr-shadow">
-                            <td class="text-capitalize">taille</td>
+                            <td class="text-capitalize">Superficie</td>
                             <td>{{field.data.area_ha|roundoff}} ha</td>
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td class="text-capitalize">Production estimee</td>
+                            <td class="text-capitalize">Production estimée</td>
                             <td>{{field.data.area_ha|roundoff|calculate_yield}} t</td>
                         </tr>
 
@@ -142,7 +142,7 @@
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td class="text-capitalize">Enregistre par</td>
+                            <td class="text-capitalize">Enregistré par</td>
                             <td><a href="{% url 'single-farmer' field|get_field_registrar_id %}">{{field|get_field_registrar}}</a></td>
                         </tr>
                        

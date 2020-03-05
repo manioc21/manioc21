@@ -24,13 +24,13 @@
                         <tbody>
 
                         <tr class="tr-shadow">
-                            <td >ID</td>
+                            <td >N° enregistrement</td>
                             <td>{{product|get_item:'_id'}}</td>
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>la localisation</td>
-                            <td><a href="#mapModal" data-toggle="modal">product location</a></td>
+                            <td>localisation</td>
+                            <td><a href="#mapModal" data-toggle="modal">{{product|get_item:'_geolocation'|roundoff_location}}</a></td>
                         </tr>
 
                          <tr class="tr-shadow">

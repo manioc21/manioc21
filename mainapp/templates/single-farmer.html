@@ -32,16 +32,12 @@
 
                              <tr class="tr-shadow">
                             <td>CMID</td>
-                            <td>{{farmer|get_item:'CMID'}}</td>
+                            <td>{{farmer.CMID|get_cmid}}</td>
                         </tr>
 
-                         <tr class="tr-shadow">
-                            <td>CMID barcode</td>
-                            <td>{{farmer|get_item:'CMID_barcode'}}</td>
-                        </tr>
 
                         <tr class="tr-shadow">
-                            <td>ID</td>
+                            <td>N° ID</td>
                             <td>{{farmer|get_item:'CMID_seqNr'}}</td>
                         </tr>
                        
@@ -73,10 +69,10 @@
                                         <select id="change_status" class="js-select2" name="property">
                                             <option value="" selected="selected">---</option>
                                             
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive
+                                            <option value="active">Actif</option>
+                                            <option value="inactive">Inactif
 </option>
-                                            <option value="dead">Morte</option>
+                                            <option value="dead">Mort</option>
                                         </select>
                                         <div class="dropDownSelect2"></div>
                                     </div>
@@ -185,7 +181,7 @@
 
                          <tr class="tr-shadow">
                             <td>Association</td>
-                            <td>{% if farmer.assoc %} {{farmer.assoc}} {% else %} {{farmer.assoc_new}}  {% endif %}</td>
+                            <td>{% if farmer.assoc_new %} {{farmer.assoc_new}} {% else %} {{farmer.assoc}}  {% endif %}</td>
                         </tr>
 
                         <tr class="tr-shadow">

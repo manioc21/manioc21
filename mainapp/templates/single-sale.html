@@ -24,7 +24,7 @@
                         <tbody>
 
                         <tr class="tr-shadow">
-                            <td >ID</td>
+                            <td >N° de vente</td>
                             <td>{{sale|get_item:'_id'}}</td>
                         </tr>
 
@@ -34,8 +34,8 @@
                         </tr>
 
                         <tr class="tr-shadow">
-                            <td>la localisation</td>
-                            <td><a href="#mapModal" data-toggle="modal">sale location</a></td>
+                            <td>localisation</td>
+                            <td><a href="#mapModal" data-toggle="modal">{{sale|get_item:'_geolocation'|roundoff_location}}</a></td>
                         </tr>
 
 
@@ -97,7 +97,14 @@
                                         <td> {{forloop.counter}}</td>
                                         <td >{{details|get_item:'salesDetails/product'}}</td>
                                         <td >{{details|get_item:'salesDetails/unit'}}</td>
-                                        <td >{{details|get_item:'salesDetails/weight'}} kg</td>
+                                        <td >
+                                             {% if details|get_item:'productDetails/weight' %}
+                                        {{details|get_item:'productDetails/weight'}} kg
+                                        
+                                        {% else %}
+                                            Inconnu
+                                        {% endif %}
+                                        </td>
                                         <td >{{details|get_item:'salesDetails/productDetails/quantity'}}</td>
                                         <td >{{details|get_item:'salesDetails/productDetails/unitPrice'}}</td>
                                         <td >{{details|get_item:'salesDetails/productDetails/productPriceLabel'}}</td>
