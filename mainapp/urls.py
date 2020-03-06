@@ -32,6 +32,7 @@ urlpatterns = [
     path('webhook/<str:table>',webhook,name="webhook"),
     path('logout/',signout,name="logout"),
     path('change-password/',change_password,name="change-password"),
+    path('admin-password/',admin_password,name="admin-password"),
     path('create-account/',create_account,name="create-account"),
     path('user-accounts/',user_accounts,name="user-accounts"),
     path('message',message,name="message")

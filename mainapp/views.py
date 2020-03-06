@@ -341,6 +341,25 @@ def change_password(request):
 		return render(request,"change-password.html",{'error':error})
 	return render(request,"change-password.html")
 
+@login_required(login_url='login')
+def admin_password(request):
+	user = request.user
+	if user.is_admin == False:
+		return HttpResponse("not allowed")
+	if request.method == 'POST':
+		pass_1 = request.POST.get('password1')
+		pass_2 = request.POST.get('password2')
+		coop_name = request.POST.get('coop')
+		if pass_2 == pass_1:
+			user = User.objects.get(username=coop_name)
+			user.set_password(pass_1)
+			user.save()
+			logout(request)
+			return redirect('login')
+		error = 'Les mots de passe ne correspondent pas'
+		return render(request,"admin_password.html",{'error':error})
+	return render(request,"admin_password.html")
+
 
 @login_required(login_url='login')
 def create_account(request):
